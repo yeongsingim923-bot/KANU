@@ -6,9 +6,10 @@ import "../../css/components/common/Reveal.css";
 type RevealProps = {
   children: ReactNode;
   delay?: number;   // 몇 초 늦게 올라올지 (예: 0.15)
+  className?: string;   // 추가로 붙일 클래스 (없어도 됨)
 };
 
-function Reveal({ children, delay = 0 }: RevealProps) {
+function Reveal({ children, delay = 0, className = "" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState(false);
 
@@ -34,7 +35,7 @@ function Reveal({ children, delay = 0 }: RevealProps) {
   return (
     <div
       ref={ref}
-      className={isShow ? "reveal is-show" : "reveal"}
+      className={`reveal ${isShow ? "is-show" : ""} ${className}`}
       style={{ animationDelay: `${delay}s` }}
     >
       {children}

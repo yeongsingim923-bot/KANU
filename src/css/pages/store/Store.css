@@ -1,0 +1,264 @@
+.store-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 84px 70px 230px;
+}
+
+/*검은 배너*/
+.store-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 44px;
+    height: 435px;
+    padding: 33px 39px 0;
+    border-radius: 40px;
+    background: var(--black);
+    color: var(--white);
+}
+
+.store-banner-img {
+    overflow: hidden;
+    flex-shrink: 0;
+    width: 748px;
+    height: 369px;
+    border-radius: 30px;
+}
+
+.store-banner-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.store-banner-text {
+    padding-top: 32px;
+}
+
+.store-banner-eng {
+    font-size: 20px;
+    font-weight: 300;
+    color: #CCCCCC;
+}
+
+.store-banner-title {
+    padding-top: 25px;
+    font-size: 66px;
+    font-weight: 800;
+    line-height: 60px;
+}
+
+.store-banner-line {
+    display: block;
+}
+
+.store-banner-char {
+    display: inline-block;
+    opacity: 0;
+}
+
+.reveal.is-show .store-banner-char {
+    animation: charUp 0.6s ease both;
+}
+
+.store-banner-desc {
+    padding-top: 21px;
+    font-size: 20px;
+}
+
+.store-banner-btn {
+    width: 258px;
+    height: 49px;
+    margin-top: 23px;
+    border-radius: 25px;
+    background: var(--red-dark);
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+}
+
+.store-banner-btn:hover {
+    background: #8E0000;
+}
+
+@keyframes charUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.store-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 101px;
+    padding-top: 39px;
+    border-top: 1px solid var(--black);
+}
+
+.store-tabs {
+    display: flex;
+    gap: 20px;
+}
+
+.store-tab,
+.store-sort {
+    height: 46px;
+    padding: 0 29px;
+    border: 1px solid #A9A9A9;
+    border-radius: 23px;
+    background: var(--white);
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.store-tab:hover {
+    border-color: var(--black);
+}
+
+.store-tab.is-active {
+    border-color: var(--black);
+    background: var(--black);
+    color: var(--white);
+}
+
+.store-sort {
+    width: 116px;
+    padding: 0 24px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.store-count {
+    padding-top: 69px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #989898;
+}
+
+.store-list {
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    justify-content: space-between;
+    padding-top: 30px;
+}
+
+/* 카드 안 줄(사진/이름/설명/가격/버튼)을 옆 카드랑 높이 맞추기
+   → 이름이 한 줄인 카드도 두 줄짜리 옆 카드랑 설명 위치가 같아짐 */
+.store-card {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-content: start;
+    padding-bottom: 60px; 
+}
+
+.store-card a {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+}
+
+.store-card-img {
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    border-radius: 40px;
+    background: var(--gray-bg);
+}
+
+.store-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.store-card a:hover .store-card-img img {
+    transform: scale(1.05);
+}
+
+.store-card-name {
+    padding: 15px 9px 0;
+    font-size: 18px;
+}
+
+.store-card-desc {
+    padding: 12px 9px 0;
+    font-size: 13px;
+}
+
+.store-card-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 9px 0;
+    font-size: 15px;
+}
+
+.store-card-rate {
+    min-width: 30px;
+    color: #D20000;
+}
+
+.store-card-price strong {
+    font-weight: 500;
+}
+
+.store-card-price del {
+    font-size: 12px;
+    color: #797979;
+}
+
+.store-card-cart {
+    width: 117px;
+    height: 30px;
+    margin: 10px 0 0 9px;
+    border: 1px solid #A9A9A9;
+    border-radius: 15px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.store-card-cart:hover {
+    border-color: var(--black);
+    background: var(--black);
+    color: var(--white);
+}
+
+.store-pager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 26px;
+    padding-top: 23px;
+}
+
+.store-pager-num {
+    width: 56px;
+    height: 56px;
+    border: 1px solid #CDCDCD;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.store-pager-num:hover {
+    border-color: var(--black);
+}
+
+.store-pager-num.is-active {
+    border-color: var(--black);
+    background: var(--black);
+    color: var(--white);
+}
+
+.store-pager-arrow {
+    font-size: 18px;
+    font-weight: 700;
+}
