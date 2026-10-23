@@ -1,0 +1,38 @@
+/* ===== 서브비주얼 (서브 페이지 상단 갈색 배너) ===== */
+.sub-visual {
+    background: var(--brown);
+    color: var(--white);
+}
+
+.sub-visual-inner {
+    max-width: 1440px;
+    height: 368px;
+    margin: 0 auto;
+    padding: 94px 70px 0;
+}
+
+/* 작은 회색 글씨 */
+.sub-visual-label {
+    font-size: 16px;
+    color: #999;
+}
+
+/* 큰 제목 */
+.sub-visual-title {
+    margin-top: 8px;
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+/* 제목 끝 빨간 점 */
+.sub-visual-dot {
+    color: #B80000;
+}
+
+/* 설명 */
+.sub-visual-desc {
+    margin-top: 8px;
+    font-size: 16px;
+}

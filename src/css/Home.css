@@ -1,0 +1,503 @@
+.main-visual {
+    display: flex;
+    justify-content: center;
+    height: 677px;
+    background: #0d0503 url("/images/home/hero.jpg") center / cover no-repeat;
+    color: var(--white);
+    text-align: center;
+}
+
+.main-visual-text {
+    padding-top: 199px;
+}
+
+.main-visual-sub {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+/* The Smallest Café */
+.main-visual-title {
+    font-size: 96px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.main-visual-title .dot {
+    color: #C00000;
+}
+
+.main-visual-btns {
+    display: flex;
+    justify-content: center;
+    gap: 19px;
+    padding-top: 38px;
+}
+
+.main-visual-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 233px;
+    height: 50px;
+    border-radius: 38px;
+    font-size: 16px;
+    font-weight: 800;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-visual-btn.btn-red {
+    background: #C00000;
+    color: var(--white);
+}
+
+.main-visual-btn.btn-red:hover {
+    background: var(--brown);
+}
+
+.main-visual-btn.btn-white {
+    background: var(--white);
+    color: var(--black);
+}
+
+.main-visual-btn.btn-white:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.home-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 92px;
+}
+
+.sub-title {
+    font-size: 24px;
+    font-weight: 200;
+    color: var(--red);
+}
+
+.home-title {
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.home-store {
+    padding-top: 85px;
+    line-height: 1.2;
+}
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.go-store {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 259px;
+    height: 74px;
+    border-radius: 38px;
+    background: #C00000;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.go-store:hover {
+    background: var(--brown);
+}
+
+.home-catalog {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 73px;
+    padding-top: 66px;
+}
+
+.home-catalog-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.home-catalog a:hover .home-catalog-img img {
+    transform: scale(1.05);
+}
+
+.home-catalog-eng {
+    padding-top: 19px;
+    font-size: 14px;
+    color: var(--red);
+}
+
+.home-catalog-name {
+    padding-top: 6px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.home-catalog-desc {
+    padding-top: 8px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* =========================================
+   메인 비주얼: 아래에서 스르륵 올라오기
+   ========================================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-visual-sub,
+.main-visual-title,
+.main-visual-btns {
+  animation: fadeUp 0.9s ease both;
+}
+
+/* 차례로 올라오게 시작 시간 엇갈리기 */
+.main-visual-sub   { animation-delay: 0.2s; }
+.main-visual-title { animation-delay: 0.35s; }
+.main-visual-btns  { animation-delay: 0.5s; }
+
+.kanu-in-numbers {
+    padding-top: 103px;
+}
+
+.numbers-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 42px;
+    border-top: 2px solid var(--black);
+    border-bottom: 2px solid var(--black);
+}
+
+.numbers-list li {
+    height: 146px;
+    padding: 27px 38px;
+}
+
+/* 칸 사이 세로선 (첫 칸 빼고 왼쪽에 선) */
+.numbers-list li + li {
+    border-left: 1px solid #989898;
+}
+
+.numbers-label {
+    font-size: 16px;
+    font-weight: 800;
+    color: #5E5E5E;
+}
+
+.numbers-value {
+    display: flex;
+    align-items: baseline;
+    padding-top: 4px;
+    padding-left: 11px;
+}
+
+/* 큰 빨간 숫자 */
+.numbers-value strong {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--red);
+}
+
+.numbers-value > span {
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.about-kanu {
+    display: grid;
+    grid-template-columns: 780px 1fr;   
+    align-items: center;                 
+    gap: 44px;
+    padding-top: 118px;
+}
+
+.about-kanu-img {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.about-kanu-img img {
+    width: 100%;
+    aspect-ratio: 780 / 575;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+/* 마우스 올리면 사진 살짝 확대 */
+.about-kanu-img:hover img {
+    transform: scale(1.04);
+}
+
+.about-kanu-desc {
+    padding-top: 2px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #555;
+}
+
+/* 브랜드 스토리 보기 버튼 */
+.about-kanu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 259px;
+    height: 63px;
+    margin-top: 34px;
+    border-radius: 32px;
+    background: #C00000;
+    color: var(--white);
+    font-size: 17px;
+    font-weight: 800;
+    transition: background-color 0.3s;
+}
+
+.about-kanu-btn:hover {
+    background: var(--brown);
+}
+   
+.kanu-benefits {
+    padding-top: 120px;
+}
+
+.benefits-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding-top: 20px;
+}
+
+/* 회색 둥근 카드 */
+.benefits-card {
+    position: relative;
+    overflow: hidden;              /* 큰 아이콘이 카드 밖으로 나가면 잘리게 */
+    height: 308px;
+    padding: 201px 30px 0 48px;
+    border-radius: 40px;
+    background: #EFEFEF;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* 마우스 올리면 카드가 살짝 떠오름 */
+.benefits-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* 큰 빨간 아이콘: 오른쪽 위로 살짝 잘려 보이게 */
+.benefits-icon {
+    position: absolute;
+    top: -22px;
+    right: -40px;
+    width: 230px;
+    height: 230px;
+    fill: none;
+    stroke: #C00000;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.4s ease;
+}
+
+/* 마우스 올리면 아이콘이 까딱 */
+.benefits-card:hover .benefits-icon {
+    transform: rotate(-8deg) scale(1.05);
+}
+
+.benefits-title {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.benefits-desc {
+    padding-top: 12px;
+    font-size: 13px;
+    color: #555;
+}
+
+/* ===== 아이콘 펜으로 그리기 ===== */
+/* 처음: 선이 하나도 안 그려진 상태 */
+.benefits-icon path,
+.benefits-icon circle {
+    opacity: 0;
+    stroke-dasharray: var(--len);     /* 선 길이만큼 점선 하나 */
+    stroke-dashoffset: var(--len);    /* 그만큼 밀어서 안 보이게 */
+}
+
+/* 카드가 화면에 보이면(Reveal is-show): 선 그리기 애니메이션 실행 */
+.reveal.is-show .benefits-icon path,
+.reveal.is-show .benefits-icon circle {
+    animation: drawLine 2s ease both;
+}
+
+@keyframes drawLine {
+    from {
+        opacity: 1;
+        stroke-dashoffset: var(--len);
+    }
+    to {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+}
+
+/* 획마다 조금씩 늦게 그려지게 */
+.reveal.is-show .benefits-icon :nth-child(1) { animation-delay: 0.3s; }
+.reveal.is-show .benefits-icon :nth-child(2) { animation-delay: 0.8s; }
+.reveal.is-show .benefits-icon :nth-child(3) { animation-delay: 1.2s; }
+.reveal.is-show .benefits-icon :nth-child(4) { animation-delay: 1.4s; }
+.reveal.is-show .benefits-icon :nth-child(5) { animation-delay: 1.6s; }
+
+.kanu-lounge {
+    display: grid;
+    grid-template-columns: 416px 1fr;
+    align-items: start;      /* 추가: 칸마다 자기 높이만큼만 */
+    padding-top: 115px;
+    min-height: 426px;
+}
+
+.lounge-head {
+    padding-top: 14px;
+}
+
+/* 전체 / 공지사항 / 이벤트 버튼 */
+.lounge-tabs {
+    display: flex;
+    gap: 10px;
+    padding-top: 26px;
+}
+
+.lounge-tab {
+    height: 46px;
+    padding: 0 24px;
+    border: 1px solid #999;
+    border-radius: 23px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.lounge-tab.is-active,
+.lounge-tab:hover {
+    border-color: var(--black);
+    background: var(--black);
+    color: var(--white);
+}
+
+/* 목록: 위아래 굵은 선 */
+.lounge-list {
+    border-top: 2px solid var(--black);
+    border-bottom: 2px solid var(--black);
+}
+
+/* 줄 사이 얇은 선 */
+.lounge-list li + li {
+    border-top: 1px solid var(--black);
+}
+
+/* 한 줄: 분류 | 제목 | 날짜 */
+.lounge-list a {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    align-items: center;
+    height: 76px;
+    padding-right: 20px;
+}
+
+.lounge-cat {
+    text-align: center;
+    font-size: 15px;
+    color: #555;
+}
+
+.lounge-title {
+    font-size: 19px;
+}
+
+.lounge-date {
+    font-size: 15px;
+    color: #555;
+}
+
+/* 마우스 올리면 제목에 밑줄 */
+.lounge-list a:hover .lounge-title {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+
+/* =========================================
+   JOIN (회원가입 배너)
+   ========================================= */
+.kanu-join {
+    max-width: 1440px;
+    margin: 90px auto 116px;
+    padding: 0 60px;
+}
+
+/* 빨간 둥근 박스 */
+.join-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 316px;
+    padding: 0 87px 0 70px;
+    border-radius: 100px;
+    background: #C00000;
+    color: var(--white);
+}
+
+/* JOIN KANU • */
+.join-eng {
+    font-size: 34px;
+    font-weight: 200;
+}
+
+.join-eng span {
+    margin-left: 8px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.join-title {
+    margin-top: 6px;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+/* 검정 회원가입 버튼 */
+.join-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 259px;
+    height: 63px;
+    border-radius: 32px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 17px;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.join-btn:hover {
+    background: var(--white);
+    color: var(--black);
+}

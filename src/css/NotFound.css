@@ -1,0 +1,111 @@
+.not-found {
+    height: 100vh;
+    padding-top: 238px;
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+}
+
+.not-found-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #999;
+    letter-spacing: 16%;
+}
+
+.not-found-number {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6px;
+    font-size: 128px;
+    font-weight: 900;
+    font-family: 'Pretendard Variable', Pretendard, sans-serif;
+    line-height: 1;
+    position: relative;
+    gap: 20px;
+}
+
+/* 커피잔 (0 자리) */
+.not-found-cup {
+    position: relative;
+    width: 256px;
+    height: 256px;
+}
+
+/* 컵만 천천히 빙글빙글 */
+.not-found-cup img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 207px;
+    translate: -38.5% -50%;            /* 잔 가운데를 상자 정가운데로 */
+    transform-origin: 38.5% 50%;       /* 잔 가운데를 중심으로 돌기 */
+    animation: cupSpin 20s linear infinite;
+}
+
+@keyframes cupSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.not-found-dot {
+    position: absolute;
+    font-size: 80px;
+    color: #C00000;
+    left: calc(50% + 242px);
+    bottom: 64px;
+}
+
+.not-found-title {
+    padding-top: 17px;
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.not-found-desc {
+    padding-top: 18px;
+    font-size: 16px;
+    color: #999;
+}
+
+.not-found-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 43px;
+    padding-bottom: 155px;
+}
+
+.not-found-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 233px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 800;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-back {
+    background: #C00000;
+    color: var(--white);
+}
+
+.btn-back:hover {
+    background: var(--white);
+    color: #000000;
+}
+
+.btn-home {
+    background: var(--white);
+    color: var(--black);
+}
+
+.btn-home:hover {
+    background: #C00000;
+    color: var(--white);
+}

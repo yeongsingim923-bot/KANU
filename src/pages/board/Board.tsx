@@ -1,0 +1,15 @@
+import SubVisual from '../../components/common/SubVisual'
+import '../../css/pages/board/Board.css'
+
+function Board() {
+
+    return(
+        <>
+            <SubVisual label="커뮤니티" title="Community" desc="카누를 좋아하는 사람들의 이야기" />
+
+            <h1>게시판</h1>
+        </>
+    )
+}
+
+export default Board

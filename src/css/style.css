@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+/* ========== reset ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { border: 0; background: none; font: inherit; color: inherit; cursor: pointer; }
+input, textarea, select { font: inherit; color: inherit; }
+table { border-collapse: collapse; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+
+/* ========== 변수 ========== */
+:root {
+  --red: #E61E2E;        /* 로고 */
+  --red-dark: #C20000;   /* 버튼 */
+  --brown: #1D0404;      /* 서브비주얼 배경 */
+  --gray-bg: #F7F7F7;
+  --gray-line: #969696;
+  --black: #000;
+  --text-sub: #575757;
+  --white: #fff;
+
+  --inner: 1440px;       /* 시안에 맞게 수정 */
+  --header-h: 78px;      /* 시안에 맞게 수정 */
+}
+
+/* ========== 기본 ========== */
+body {
+  font-family: 'Roboto', 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 16px;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+/* ========== 공통 클래스 ========== */
+.inner { max-width: var(--inner); margin: 0 auto; padding: 0 20px; }
+.blind {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* 반응형 기준: 태블릿 max-width: 1024px / 모바일 max-width: 768px */
