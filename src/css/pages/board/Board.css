@@ -1,0 +1,121 @@
+.board{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 60px 80px;
+}
+.board-header{
+    display: flex;
+        flex-direction: column;
+    gap: 4px;
+}
+    .board-header >span{
+        font-weight: 800;
+            font-size: 16px;
+        color: #D20000;
+    }
+    .board-header >h1{
+        font-weight: 800;
+            font-size: 45px;
+    }
+.pop-board{
+    display: flex;
+}
+/*상단: 분류 탭 | 검색 + 글쓰기*/
+.board-top{
+    display: flex;
+        justify-content: space-between;
+        align-items: center;
+}
+    .tabs{
+        display: flex;
+        gap: 25px;
+    }
+        .tab{
+            width: 80px;
+            height: 32px;
+            border: 1px solid #A9A9A9;
+                border-radius: 38px;
+            background-color: #FFFFFF;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .tab.active{                /*선택된 분류*/
+            background-color: #000000;
+            border-color: #000000;
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+    .tools{
+        display: flex;
+            align-items: center;
+        gap: 16px;
+    }
+        .tools >form{
+            display: flex;
+            gap: 8px;
+        }
+            .tools >form >input{
+                width: 160px;
+                height: 32px;
+                padding: 0 14px;
+                border: 1px solid #A9A9A9;
+                    border-radius: 38px;
+                font-size: 13px;
+            }
+            .tools >form >button{
+                width: 78px;
+                height: 32px;
+                border: none;
+                    border-radius: 38px;
+                background-color: #000000;
+                color: #FFFFFF;
+                font-weight: 700;
+                cursor: pointer;
+            }
+        .write-btn{
+            display: flex;
+                justify-content: center;
+                align-items: center;
+            width: 78px;
+            height: 32px;
+            border-radius: 38px;
+            background-color: #C90000;
+            color: #FFFFFF;
+            font-size: 14px;
+                font-weight: 700;
+            text-decoration: none;     /*링크 밑줄 제거*/
+        }
+
+/*목록 표*/
+table{
+    width: 100%;
+    border-collapse: collapse;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+    font-size: 13px;
+}
+    tr{
+        border-bottom: 1px solid #DDD;   /*줄 사이 선 (머리글 아래 포함)*/
+    }
+    th, td{
+        height: 52px;
+        padding: 0 12px;
+        text-align: center;
+    }
+    th{
+        font-weight: 500;
+    }
+    td{
+        color: #555;
+    }
+    .col-title{                         /*제목 열만 왼쪽 정렬*/
+        text-align: left;
+    }
+    td.col-title{
+        color: #000;
+    }
+        .photo-mark{
+            color: #C90000;
+            font-size: 12px;
+        }

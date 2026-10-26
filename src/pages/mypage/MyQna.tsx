@@ -17,8 +17,27 @@ function MyQna() {
                     
                 ]}
             />
-            
-            <h1>1:1문의내역</h1>
+            <div className="mypage-qna">
+                <div className="mypage-qna-header">
+                    <label> 
+                        <h2>1:1 문의 내역</h2>
+                        <span>제목을 누르면 문의 내용과 답변을 볼 수 있어요.</span>
+                    </label>
+                    <button><img src="/images/notice.png"/>새 문의 하기</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>분류</th>
+                            <th>제목</th>
+                            <th>등록일자</th>
+                            <th>조회수</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list"></tbody> 
+                </table>
+            </div>
         </>
     )
 }

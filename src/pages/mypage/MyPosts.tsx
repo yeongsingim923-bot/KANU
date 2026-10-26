@@ -17,8 +17,27 @@ function MyPosts() {
                     
                 ]}
             />
-            
-            <h1>내가 쓴 글</h1>
+            <div className="mypage-posts">
+                <div className="mypage-posts-header">
+                    <label> 
+                        <h2>내가 쓴 글</h2>
+                        <span>커뮤니티에 남긴 글과 댓글을 모아봤어요.</span>
+                    </label>
+                    <button type="button"><img src="/images/write.png"/>새 글 쓰기</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>분류</th>
+                            <th>제목</th>
+                            <th>등록일자</th>
+                            <th>조회수</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                <tbody id="list"></tbody> 
+                </table>
+            </div>
         </>
     )
 }

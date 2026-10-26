@@ -1,0 +1,48 @@
+.mypage-posts{
+    width: 100%;
+        max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+        flex-direction: column;
+    gap: 54px;
+}
+.mypage-posts-header{
+    width: 100%;   
+    display: flex;
+        justify-content: space-between;
+    padding-right: 61px;
+}
+    .mypage-posts-header >label{
+        display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        gap: 14px;
+    }
+        .mypage-posts-header >label >h2{
+            font-weight: 700;
+                font-size: 36px;
+        }
+        .mypage-posts-header >label >span{
+            font-weight: 400;
+                font-size: 16px;
+            margin-bottom: 6px;
+        }
+    .mypage-posts-header >button{
+        width: 169px;
+        height: 51px;
+        display: flex;
+            align-items: center;
+            justify-content: center;
+        align-self: flex-end;
+        text-align: center;
+        border-radius: 38px;
+        font-weight: 600;
+            font-size: 16px;
+        background-color: #C50000;
+        color: #FFFFFF;
+        gap: 14px;
+    }
+        .mypage-posts-header >button >img{
+            width: 24px;
+            height: 24px;
+        }

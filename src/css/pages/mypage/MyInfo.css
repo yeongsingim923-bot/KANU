@@ -1,0 +1,114 @@
+.mypage-info{
+    width: 100%;
+        max-width: 1293px;
+    display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    padding: 54px 66px 221px 81px;
+    margin: 0 auto;
+    gap: 32px;
+    font-size: 17px;
+}
+    .mypage-info >div{
+        display: flex;
+            flex-direction: column;
+        padding: 0 5px;           
+        gap: 14px;
+    }
+        .mypage-info >div >h1{
+            font-weight: 700;
+                font-size: 36px;
+        }
+        .mypage-info >div >span{
+            font-size: 16px;
+        }
+    .mypage-info .main{
+        width: 100%;
+        display: flex;
+            flex-direction: column;
+    }
+        .mypage-info .main >div:not(.btn){
+            width: 100%;
+            display: flex;
+                flex-direction: column;
+            gap: 32px;
+            border-top: 2px solid #000000;
+            padding: 30px 0 44px 0;
+        }
+            .mypage-info .main >div >p{
+                font-size: 24px;
+                margin-left: 4px;
+            }
+            .mypage-info .main >div >label,
+            .mypage-info .field-row >label{
+                width: 100%;
+                display: flex;
+                    flex-direction: column;
+                gap: 5px;
+            }
+                .mypage-info .main >div >label >input,
+                .mypage-info .field-row >label >input{
+                    width: 100%;
+                    height: 56px;
+                    padding: 0 20px;
+                    border: 1px solid #818181;
+                        border-radius: 15px;
+                }
+                .mypage-info .basic > label >input[readonly]{         /*아이디 입력란*/
+                    border: 1px solid #E8E8E8;
+                    background-color: #E8E8E8;
+                }
+                .mypage-info .main >div >label >span,
+                .mypage-info .field-row >label >span{
+                    letter-spacing: 0.05em;
+                    margin-left: 4px;
+                }
+            .mypage-info .basic >div{
+                display: flex;
+                gap: 40px;
+            }
+            .mypage-info .marketing >div{
+                display: flex;
+                    align-items: center;
+                gap: 100px;
+            }
+                .mypage-info .marketing >div >label{
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                }
+                    .mypage-info .marketing >div >label >input{
+                        width: 30px;
+                        height: 30px;
+                    }
+                    .mypage-info .marketing >div >label >span{
+                        font-weight: 500;
+                            font-size: 20px;
+                    }
+        .mypage-info .btn{
+            display: flex;
+                justify-content: center;
+            margin-top: 76px;
+            gap: 53px;
+        }
+            .mypage-info .btn >button{
+                width: 150px;
+                height: 50px;
+                border: 1px solid #9C9C9C;
+                    border-radius: 38px;
+                font-weight: 600;
+                    font-size: 16px;
+            }
+            .mypage-info .btn >button:nth-child(2){
+                background-color: #C50000;
+                color: #FFFFFF;
+                border: none;
+            }
+    .mypage-info >button{
+        margin-top: 12px;
+        align-self: flex-end;
+        font-size: 20px;
+        color: #888888;
+        text-decoration: underline;
+    }
+    
