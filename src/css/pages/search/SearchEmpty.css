@@ -1,0 +1,95 @@
+/* =========================================
+   검색 결과 없음 - 안내
+   (게시판 검색 결과 없음에서도 아이콘/제목/설명 같이 씀)
+   ========================================= */
+.search-empty-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 116px;
+}
+
+.search-empty-icon {
+    width: 92px;
+    height: 92px;
+}
+
+.search-empty-title {
+    padding-top: 22px;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.search-empty-desc {
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+/* 추천 검색어 */
+.search-empty-tags {
+    display: flex;
+    gap: 15px;
+    padding-top: 20px;
+}
+
+.search-empty-tags button {
+    height: 51px;
+    padding: 0 27px;
+    border: 1px solid #A9A9A9;
+    border-radius: 26px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.search-empty-tags button:hover {
+    border-color: var(--black);
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* =========================================
+   추천 제품 (스토어 카드 재사용)
+   ========================================= */
+.search-reco {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 97px 81px 213px;
+}
+
+.search-reco-eng {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--red);
+}
+
+.search-reco-title {
+    padding-top: 11px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.search-reco .store-list {
+    grid-template-columns: repeat(4, 300px);
+    justify-content: start;
+    column-gap: 26px;
+    padding-top: 7px;
+}
+
+/* 여기 카드는 설명 줄이 없어서 줄 수 하나 빼기 */
+.search-reco .store-card {
+    grid-row: span 3;
+    padding-bottom: 0;
+}
+
+.search-reco .store-card a {
+    grid-row: span 2;
+}
+
+.search-reco .store-card-name {
+    padding-top: 17px;
+}
+
+.search-reco .store-card-price {
+    padding-top: 12px;
+}

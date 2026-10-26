@@ -1,0 +1,226 @@
+/* =========================================
+   마이페이지 - 주문 상세
+   ========================================= */
+.order-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 64px 77px 200px 71px;
+}
+
+/* 제목 + 목록으로 */
+.order-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.order-title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.order-date {
+    padding-top: 12px;
+    font-size: 15px;
+}
+
+.order-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 149px;
+    height: 50px;
+    margin-top: 3px;
+    border: 1px solid #A9A9A9;
+    border-radius: 25px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.order-back:hover {
+    border-color: var(--black);
+}
+
+
+/* 주문 단계 박스 위치만 조정 (박스 모양은 MyOrder.css) */
+.order-steps {
+    margin-top: 60px;
+}
+
+
+/* =========================================
+   주문 상품
+   ========================================= */
+.order-products {
+    margin-top: 67px;
+    border-top: 2px solid var(--black);
+}
+
+.order-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 0 0 17px;
+}
+
+.order-section-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.order-track {
+    width: 149px;
+    height: 34px;
+    border: 1px solid #A9A9A9;
+    border-radius: 17px;
+    font-size: 14px;
+}
+
+.order-list {
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 26px 31px 23px 26px;
+}
+
+.order-item + .order-item {
+    padding-top: 21px;
+    border-top: 1px solid #AAAAAA;
+}
+
+.order-item:last-child {
+    padding-bottom: 30px;
+}
+
+.order-item-img {
+    overflow: hidden;
+    flex-shrink: 0;
+    width: 152px;
+    height: 108px;
+    border-radius: 16px;
+    background: #D9D9D9;
+}
+
+.order-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.order-item-info {
+    flex: 1;
+    padding-left: 17px;
+}
+
+.order-item-name {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.order-item-count {
+    padding-top: 10px;
+    font-size: 13px;
+    color: var(--text-sub);
+}
+
+.order-item-price {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   배송지 + 결제정보 (양쪽 칸)
+   ========================================= */
+.order-bottom {
+    display: grid;
+    grid-template-columns: 622px 1fr;
+    gap: 54px;
+    padding-top: 55px;
+}
+
+.order-box {
+    border-top: 2px solid var(--black);
+}
+
+.order-box .order-section-title {
+    padding: 22px 0 0 14px;
+}
+
+.order-address {
+    padding: 30px 14px 0;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.order-address-name {
+    font-weight: 700;
+}
+
+.order-address-memo {
+    padding-top: 6px;
+    color: var(--text-sub);
+}
+
+.order-pay {
+    padding-top: 23px;
+}
+
+.order-pay div {
+    display: flex;
+    justify-content: space-between;
+    padding: 28px 33px 29px;
+    font-size: 16px;
+}
+
+.order-pay div + div {
+    border-top: 1px solid #C4C4C4;
+}
+
+.order-pay dt {
+    color: var(--text-sub);
+}
+
+.order-pay-total {
+    font-weight: 700;
+}
+
+.order-btns {
+    display: flex;
+    justify-content: center;
+    gap: 54px;
+    padding-top: 81px;
+}
+
+.order-qna,
+.order-list-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.order-qna {
+    width: 149px;
+    border: 1px solid #A9A9A9;
+}
+
+.order-qna:hover {
+    border-color: var(--black);
+}
+
+.order-list-btn {
+    width: 168px;
+    background: var(--black);
+    color: var(--white);
+}
+
+.order-list-btn:hover {
+    background: var(--red-dark);
+}

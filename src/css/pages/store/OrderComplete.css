@@ -1,0 +1,82 @@
+.complete {
+    width: 771px;
+    margin: 0 auto;
+    padding: 168px 0 200px;
+    text-align: center;
+}
+
+.complete-title {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.complete-num {
+    padding-top: 23px;
+    font-size: 15px;
+}
+
+/* 주문 정보 표 */
+.complete-table {
+    margin-top: 50px;
+    border-top: 2px solid var(--black);
+    border-bottom: 2px solid var(--black);
+    text-align: left;
+}
+
+.complete-table div {
+    display: grid;
+    grid-template-columns: 318px 1fr;
+    height: 75px;
+    padding-top: 25px;
+    font-size: 16px;
+}
+
+.complete-table div + div {
+    border-top: 1px solid #C4C4C4;
+}
+
+.complete-table dt {
+    padding-left: 111px;
+    color: var(--text-sub);
+}
+
+.complete-table dd {
+    font-weight: 500;
+}
+
+.complete-btns {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 48px;
+}
+
+.complete-history,
+.complete-shop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 28px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.complete-history {
+    border: 1px solid #A9A9A9;
+}
+
+.complete-history:hover {
+    border-color: var(--black);
+}
+
+.complete-shop {
+    padding: 0 23px;
+    background: var(--red-dark);
+    color: var(--white);
+}
+
+.complete-shop:hover {
+    background: #8E0000;
+}
