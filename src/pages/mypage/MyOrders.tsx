@@ -1,10 +1,44 @@
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, Navigate } from "react-router-dom"
 import Lnb from "../../components/common/Lnb"
 import SubVisual from "../../components/common/SubVisual"
+import { useAuthStore } from "../../store/authStore"
+import { ORDER_STEPS, won, formatDate } from "../../data/orders"
+import type { OrderSummary } from "../../data/orders"
 import "../../css/pages/mypage/MyOrder.css"
 
-// 디자인용 화면 (데이터 연결은 나중에)
 function MyOrders() {
+    const user = useAuthStore((s) => s.user)
+    const authLoading = useAuthStore((s) => s.loading)
+    const [orders, setOrders] = useState<OrderSummary[] | null>(null)   // null = 불러오는 중
+    const [error, setError] = useState("")
+
+    // 로그인 확인이 끝나면 내 주문 목록 불러오기
+    useEffect(() => {
+        if (!user) return
+        const load = async () => {
+            const res = await fetch('/api/orders')
+            const data = await res.json().catch(() => ({ message: `서버 오류 (${res.status})` }))
+            if (res.ok) setOrders(data)
+            else setError(data.message)
+        }
+        load()
+    }, [user])
+
+    // 주문 취소: 서버에서 바꾼 뒤 화면의 상태도 '주문 취소'로
+    const cancelOrder = async (orderNo: string) => {
+        if (!confirm("주문을 취소할까요?")) return
+        const res = await fetch(`/api/orders/${encodeURIComponent(orderNo)}/cancel`, { method: 'POST' })
+        const data = await res.json().catch(() => ({ message: `서버 오류 (${res.status})` }))
+        if (!res.ok) return alert(data.message)
+        setOrders((prev) => prev && prev.map((o) => (o.orderNo === orderNo ? { ...o, status: "주문 취소" } : o)))
+    }
+
+    if (authLoading) return null
+    if (!user) return <Navigate to="/login" replace state={{ from: "/mypage" }} />   // 로그인하면 다시 마이페이지로
+
+    const list = orders ?? []
+    const activeCount = list.filter((o) => o.status !== "배송 완료" && o.status !== "주문 취소").length   // 진행 중인 주문
 
     return(
         <>
@@ -24,7 +58,7 @@ function MyOrders() {
                 <div className="my-cards">
                     <div className="my-welcome">
                         <p className="my-welcome-eng">WELCOME</p>
-                        <p className="my-welcome-name">김카누 님</p>
+                        <p className="my-welcome-name">{user.username} 님</p>
                         <Link to="/mypage/info" className="my-welcome-btn">회원 정보 수정</Link>
                     </div>
                     <div className="my-card">
@@ -33,15 +67,15 @@ function MyOrders() {
                     </div>
                     <div className="my-card">
                         <p className="my-card-title">진행 중인 주문</p>
-                        <p className="my-card-num"><strong>1</strong>건</p>
+                        <p className="my-card-num"><strong>{activeCount}</strong>건</p>
                     </div>
                 </div>
-
+                {/* 단계별 주문 수 (1건 이상이면 강조) */}
                 <ol className="my-steps">
-                    <li className="is-on"><strong>1</strong>결제 완료</li>
-                    <li><strong>0</strong>배송 준비</li>
-                    <li><strong>0</strong>배송 중</li>
-                    <li><strong>0</strong>배송 완료</li>
+                    {ORDER_STEPS.map((step) => {
+                        const n = list.filter((o) => o.status === step).length
+                        return <li key={step} className={n > 0 ? "is-on" : ""}><strong>{n}</strong>{step}</li>
+                    })}
                 </ol>
 
                 <div className="my-head">
@@ -49,24 +83,41 @@ function MyOrders() {
                     <button type="button" className="my-period">1개월</button>
                 </div>
 
-                <div className="my-order">
-                    <div className="my-order-top">
-                        <span>2026.10.16</span>
-                        <span>20261016-0024</span>
-                        <Link to="/mypage/order/20261016-0024" className="my-order-link">주문 상세 &gt;</Link>
-                    </div>
-                    <div className="my-order-item">
-                        <div className="my-order-img">
-                            <img src="/images/store/stick-latte.png" alt="카누 라떼" />
+                {/* 주문 목록 */}
+                {error ? (
+                    <p className="my-empty">{error}</p>
+                ) : orders === null ? (
+                    <p className="my-empty">주문 내역을 불러오는 중...</p>
+                ) : orders.length === 0 ? (
+                    <p className="my-empty">아직 주문 내역이 없어요.</p>
+                ) : (
+                    orders.map((o) => (
+                        <div className="my-order" key={o.orderNo}>
+                            <div className="my-order-top">
+                                <span>{formatDate(o.createdAt)}</span>
+                                <span>{o.orderNo}</span>
+                                <Link to={`/mypage/order/${o.orderNo}`} className="my-order-link">주문 상세 &gt;</Link>
+                            </div>
+                            <div className="my-order-item">
+                                <div className="my-order-img">
+                                    {o.firstItem?.img && <img src={o.firstItem.img} alt={o.firstItem.name} />}
+                                </div>
+                                <div className="my-order-info">
+                                    <span className="my-order-status">{o.status}</span>
+                                    <p className="my-order-name">
+                                        {o.firstItem?.name} {o.firstItem?.option}
+                                        {o.itemCount > 1 && ` 외 ${o.itemCount - 1}건`}
+                                    </p>
+                                    <p className="my-order-sub">{o.totalQty}개 · {won(o.payPrice)}</p>
+                                </div>
+                                {/* 결제 완료일 때만 취소 가능 */}
+                                {o.status === "결제 완료" && (
+                                    <button type="button" className="my-order-cancel" onClick={() => cancelOrder(o.orderNo)}>주문 취소</button>
+                                )}
+                            </div>
                         </div>
-                        <div className="my-order-info">
-                            <span className="my-order-status">결제 완료</span>
-                            <p className="my-order-name">카누 라떼 (50T) 외 1건</p>
-                            <p className="my-order-sub">2개 · 32,600원</p>
-                        </div>
-                        <button type="button" className="my-order-cancel">주문 취소</button>
-                    </div>
-                </div>
+                    ))
+                )}
 
                 <div className="my-pager">
                     <button type="button" className="my-pager-arrow">&lt;</button>

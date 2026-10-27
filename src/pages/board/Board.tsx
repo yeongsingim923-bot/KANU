@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import SubVisual from '../../components/common/SubVisual'
 import '../../css/pages/board/Board.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuthStore } from '../../store/authStore'
+import BoardEmpty from './BoardEmpty'
 type Post = {
     id: number
     category: string
@@ -34,6 +35,13 @@ function Board() {
         e.preventDefault()   // 페이지 새로고침 막기
         setKeyword(String(new FormData(e.currentTarget).get('q') ?? '').trim())
     }
+    // 검색 결과 없음 → "전체 글 보기": 검색어 + 분류 초기화 (같은 주소라 Link만으로는 안 바뀜)
+    const searchRef = useRef<HTMLFormElement>(null)
+    const showAll = () => {
+        searchRef.current?.reset()
+        setKeyword('')
+        setCategory('전체')
+    }
     return(
         <>
             <SubVisual label="커뮤니티" title="Community" desc="카누를 좋아하는 사람들의 이야기" />
@@ -55,13 +63,16 @@ function Board() {
                         <button type="button" onClick={()=>setCategory('후기')} className={category==='후기'?'tab active':'tab'}>후기</button>
                     </div>
                     <div className="tools">
-                        <form onSubmit={handleSearch} role="search">
+                        <form ref={searchRef} onSubmit={handleSearch} role="search">
                             <input name='q' type="search" placeholder="검색어를 입력해주세요" aria-label="커뮤니티 검색" />
                             <button>검색</button>
                         </form>
                         {user && <Link to="/board/write" className="write-btn">글쓰기</Link>}
                     </div>
                 </div>
+                {keyword && shown.length === 0 ? (
+                    <BoardEmpty keyword={keyword} onShowAll={showAll} />
+                ) : (
                 <table>
                     <thead>
                         <tr>
@@ -73,13 +84,14 @@ function Board() {
                             <tr key={p.id}>
                                 <td>{i + 1}</td>
                                 <td>{p.category}</td>
-                                <td className="col-title">{p.title}</td>
+                                <td className="col-title"><Link to={`/board/${p.id}`}>{p.title}</Link></td>
                                 <td>{p.author}</td>
                                 <td>{p.created_at.slice(0, 10).replaceAll('-', '.')}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                )}
             </div>
         </>
     )

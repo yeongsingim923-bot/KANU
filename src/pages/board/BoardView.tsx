@@ -1,22 +1,59 @@
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import SubVisual from '../../components/common/SubVisual'
 import '../../css/pages/board/BoardView.css'
 
-function BoardView() {
+type Post = {
+    id: number
+    category: string
+    title: string
+    content: string
+    author: string
+    images: string | string[] | null   // 서버에서 '["/uploads/a.jpg"]' 같은 JSON 문자열로 옴
+    created_at: string
+}
 
+function BoardView() {
+    const { id } = useParams()              // 주소 /board/5 → id = "5"
+    const navigate = useNavigate()
+    const [post, setPost] = useState<Post | null>(null)   // 불러온 글 (불러오기 전엔 null)
+    const [error, setError] = useState('')                // 없는 글 등 오류 메시지
+    useEffect(() => {
+        const load = async () => {
+            const res = await fetch('/api/community/' + id)
+            const data = await res.json().catch(() => ({ message: `서버 오류 (${res.status})` }))
+            if (res.ok) setPost(data)
+            else setError(data.message)
+        }
+        load()
+    }, [id])
+    if (error) return (     // 없는 글 / 서버 오류
+        <>
+            <SubVisual label="커뮤니티" title="Community" desc="카누를 좋아하는 사람들의 이야기" />
+                        <div className='board-view board-view-error'>
+                            <p className='board-view-error-msg'>{error}</p>
+                            <button type="button" className='board-view-error-btn' onClick={() => navigate('/board')}>목록</button>
+                        </div>
+        </>
+    )
+    if (!post) return null      // 불러오는 중
+    const images: string[] = typeof post.images === 'string' ? JSON.parse(post.images) : (post.images ?? [])        // 사진 주소 배열로 바꾸기 (사진 없으면 빈 배열)
     return(
         <>
             <SubVisual label="커뮤니티" title="Community" desc="카누를 좋아하는 사람들의 이야기" />
             <div className='board-view'>
                 <div className='board-view-header'> {/*위쪽 각 정보별 백엔드받기*/}
-                    <label>후기</label>     {/*분류칸*/}
-                    <h2>한정판 과테말라 안티구아 마셔본 후기</h2>   {/*제목 */}
-                    <span>작성자.작성일.조회수.좋아요</span> 
+                    <label>{post.category}</label>     {/*분류칸*/}
+                    <h2>{post.title}</h2>   {/*제목 */}
+                    <span>{post.author} · {post.created_at.slice(0, 10).replaceAll('-', '.')}</span>
                 </div>
                 <div className='main'>  {/* 메인 사진이랑 글*/}
-                    <div className='view-main-1'>사진1</div> {/*사진들 없으면 숨기게 수정*/}
-                    <div className='view-main-2'>사진2</div>
-                    <div className='view-main-3'>사진3</div>
-                    <p>산미가 은은하고 끝맛이 깔끔해요.</p> {/*본문 */}
+                    {images.map((src, i) => (   /* 사진: 있는 만큼만 출력 (없으면 아무것도 안 나옴) */
+                        <div className={'view-main-' + (i + 1)} key={src}>
+                            <img src={src} alt={`첨부 사진 ${i + 1}`} />
+                        </div>
+                    ))}
+                    <p>{post.content}</p> {/*본문 */}
                     <button className='Like-btn'>
                         <span className='Like-icon'>♡</span>
                         <span>좋아요</span>
@@ -25,7 +62,7 @@ function BoardView() {
                 </div>
                 <div className='coment'>    {/*댓글창, 로그인 하면 (목록,수정,삭제)칸 보이게 */}                    
                     <div className='coment-btn'>  {/* 목록은 자기글이 아닐때는 중앙에, 자기글이면 아래버튼과 정렬 되어 왼쪽으로 보이게 */}
-                        <button>목록</button>
+                        <button type="button" onClick={() => navigate('/board')}>목록</button>
                         <div className='loginUser-control'>  {/*자기 글일때만 보이게, 글 수정칸 */}
                             <button>수정</button>
                             <button>삭제</button>

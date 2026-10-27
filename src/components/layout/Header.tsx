@@ -63,7 +63,7 @@ function Header() {
                         {/* [수정] 로그인 상태에 따라 "환영 + 로그아웃" / "로그인 + 회원가입" 전환 */}
                         {user ? (
                             <>
-                                <span className="header-util-link">{user.username}님 환영합니다.</span>
+                                <Link to="/mypage" className="header-util-link">{user.username}님 환영합니다.</Link>
                                 <button type="button" className="header-util-link" onClick={handleLogout}>로그아웃</button>
                             </>
                         ) : (

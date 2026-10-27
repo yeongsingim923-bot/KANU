@@ -4,9 +4,10 @@ import "../../css/pages/board/BoardEmpty.css"
 
 type BoardEmptyProps = {
     keyword: string;   // 게시판에서 검색한 단어
+    onShowAll?: () => void;   // "전체 글 보기" 눌렀을 때 검색 초기화 (부모가 넘겨줌)
 };
 
-function BoardEmpty({ keyword }: BoardEmptyProps) {
+function BoardEmpty({ keyword, onShowAll }: BoardEmptyProps) {
     return (
         <div className="board-empty">
             <svg className="search-empty-icon" viewBox="0 0 92 92" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round">
@@ -22,7 +23,7 @@ function BoardEmpty({ keyword }: BoardEmptyProps) {
             </p>
 
             <div className="board-empty-btns">
-                <Link to="/board" className="board-empty-all">전체 글 보기</Link>
+                <Link to="/board" className="board-empty-all" onClick={onShowAll}>전체 글 보기</Link>
                 <Link to="/board/write" className="board-empty-write">첫 글 남기기</Link>
             </div>
         </div>

@@ -78,10 +78,25 @@
                     border-radius: 15px;
                 letter-spacing: 0.05em;
             }
-    .id{
+            /*안내 문구: 입력칸 바로 아래에 겹쳐 띄움 (문구가 생겨도 아래 칸/버튼 위치가 안 밀리게)*/
+            .join >form >div >label >.hidden{
+                position: absolute;
+                top: calc(100% + 6px);
+                left: 4px;
+                font-size: 14px;
+            }
+                /*중복확인 통과 문구는 초록색*/
+                .join .hidden.ok{
+                    color: #1A7F37;
+                }
+                /*입력칸 안에 중복확인 버튼이 있으면 글자가 버튼 밑으로 안 들어가게*/
+                .join >form >div >label:has(.hidden-btn) >input{
+                    padding-right: 120px;
+                }
+    .join .id{
         align-items: last baseline;
     }
-        .id >button{
+        .join .id >button{
             width: 158px;
             height: 56px;
             border: 1px solid #A9A9A9;
@@ -101,12 +116,12 @@
             letter-spacing: 0.05em;
             color: #FFFFFF;
         }
-    .hidden{
+    .join .hidden{
         letter-spacing: 0.05em;
         color: #FD2600;
     }
     /*휴대폰 인증요청*/
-    .hidden-btn{    
+    .join .hidden-btn{    
         position: absolute;
         right: 9px;
         bottom: 7px;

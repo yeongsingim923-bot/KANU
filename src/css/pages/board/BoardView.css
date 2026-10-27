@@ -1,3 +1,25 @@
+/*없는 게시글 / 서버 오류 화면*/
+.board-view.board-view-error{
+    gap: 32px;                  /*문구와 버튼 사이 간격*/
+}
+    .board-view-error-msg{
+        font-weight: 700;
+            font-size: 24px;
+    }
+    .board-view-error-btn{     /*글보기의 목록/수정/삭제 버튼과 같은 모양*/
+        width: 100px;
+        height: 37px;
+        border: 1px solid #A9A9A9;
+            border-radius: 38px;
+        background-color: #FFFFFF;
+        letter-spacing: 0.05em;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .board-view-error-btn:hover{
+        background-color: #000000;
+        border-color: #000000;
+        color: #FFFFFF;
+    }
 .board-view{
     width: 100%;
         max-width: 913px;
@@ -40,7 +62,7 @@
         .board-view-header >span{
             color: #626262;
         }
-    .main{
+    .board-view .main{
         width: 100%;
         display: flex;
             align-items: center;
@@ -55,12 +77,18 @@
             display: flex;
             margin-bottom: 17px;
         }
-        .main >p{
+            .view-main >img{    /*첨부 사진: 칸(높이 276px)을 꽉 채우고 넘치는 부분은 잘라냄*/
+                width: 100%;
+                height: 100%;
+                object-fit: cover;  
+            }
+        .board-view .main >p{
             width: 100%;
             display: flex;
             padding: 0 2px;
+            white-space: pre-wrap;
         }
-        .Like-btn{
+        .board-view .Like-btn{
             height: auto;
             display: flex;
                 justify-content: center;
@@ -70,34 +98,34 @@
                 border-radius: 38px;
             gap: 16px;
         }
-            .Like-icon{
+            .board-view .Like-icon{
                 width: 29px;
                 height: 29px;
                 display: flex;
                     justify-content: center;
                     align-items: center;
             }
-            .Like-btn >span{
+            .board-view .Like-btn >span{
                 letter-spacing: 0.05em;
             }
-            .Like-count{
+            .board-view .Like-count{
                 font-weight: 800;
             }
-        .coment{
+        .board-view .coment{
             width: 100%;
             display: flex;
                 flex-direction: column;
         }
-            .coment-btn{
+            .board-view .coment-btn{
                 display: flex;
                     justify-content: space-between;
                 margin-top: 17px;
                     margin-bottom: 38px;
             }
-                .coment-btn >:only-child{
+                .board-view .coment-btn >:only-child{
                     margin: 0 auto;
                 }
-                .coment-btn  button{
+                .board-view .coment-btn  button{
                     width: 100px;
                     height: 37px;
                     border: 1px solid #A9A9A9;
@@ -159,28 +187,30 @@
                 .coment >label >p{
                     border: none;
                 }
-        .board-list{
+        .board-view .board-list{
             width: 100%;
             display: flex;
                 flex-direction: column;
         }
-            .board-list >div{
+            .board-view .board-list >div{
                 display: flex;
                     justify-content: space-between;
                 border: none;
                     border-bottom: 1px solid #717171;
                 padding: 16px 4px 16px 12px;
             }
-                .board-list >div:first-child{
+                .board-view .board-list >div:first-child{
                     padding-top: 20px;
                 }
-                .board-list >div >span:first-child{
+                .board-view .board-list >div >span:first-child{
                     padding-right: 69px;
                 }
-                .board-list >div >button{
+                .board-view .board-list >div >button{
                     flex: 1;
                     text-align: left;
                 }
-                .board-list >div >span:last-child{
+                .board-view .board-list >div >span:last-child{
                     padding-left: 12px;
                 }
+            
+           

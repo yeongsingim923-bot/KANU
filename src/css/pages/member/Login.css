@@ -34,7 +34,7 @@
         display: flex;
             justify-content: space-between;
     }
-        .check{             /*체크박스 + 글자 한 줄로*/
+        .login .check{             /*체크박스 + 글자 한 줄로*/
             display: flex;
                 align-items: center;
             gap: 8px;
@@ -42,7 +42,7 @@
                 letter-spacing: 0.05em;
             cursor: pointer;
         }
-            .check >input{
+            .login .check >input{
                 width: 20px;
                 height: 20px;
                 accent-color: #333;     /*체크됐을 때 색*/

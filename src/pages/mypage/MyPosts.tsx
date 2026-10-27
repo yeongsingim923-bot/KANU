@@ -1,8 +1,10 @@
 import Lnb from "../../components/common/Lnb"
 import SubVisual from "../../components/common/SubVisual"
 import "../../css/pages/mypage/MyPosts.css"
+import { useNavigate } from "react-router-dom"
 
 function MyPosts() {
+    const navigate = useNavigate()
 
     return(
         <>
@@ -23,7 +25,7 @@ function MyPosts() {
                         <h2>내가 쓴 글</h2>
                         <span>커뮤니티에 남긴 글과 댓글을 모아봤어요.</span>
                     </label>
-                    <button type="button"><img src="/images/write.png"/>새 글 쓰기</button>
+                    <button type="button" onClick={() => navigate('/board/write')}><img src="/images/write.png"/>새 글 쓰기</button>
                 </div>
                 <table>
                     <thead>

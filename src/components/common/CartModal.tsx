@@ -5,10 +5,11 @@ import "../../css/components/common/CartModal.css"
 // 장바구니 담기 누르면 뜨는 팝업
 type CartModalProps = {
     item: Product          // 담은 제품
+    qty: number            // 담은 수량
     onClose: () => void    // 닫기 (부모가 넘겨줌)
 }
 
-function CartModal({ item, onClose }: CartModalProps) {
+function CartModal({ item, qty, onClose }: CartModalProps) {
     return (
         // 어두운 배경: 누르면 닫힘
         <div className="cart-modal-dim" onClick={onClose}>
@@ -24,7 +25,7 @@ function CartModal({ item, onClose }: CartModalProps) {
                     </div>
                     <div>
                         <p className="cart-modal-name">{item.name}</p>
-                        <p className="cart-modal-info">1개 · {item.price.toLocaleString()}원</p>
+                        <p className="cart-modal-info">{qty}개 · {(item.price * qty).toLocaleString()}원</p>
                     </div>
                 </div>
 

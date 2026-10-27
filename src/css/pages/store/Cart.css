@@ -217,3 +217,42 @@
 .cart-continue:hover {
     border-color: var(--black);
 }
+
+/* 장바구니가 비었을 때 */
+.cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 160px 20px 220px;
+    text-align: center;
+}
+
+.cart-empty-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.cart-empty-desc {
+    margin-top: 14px;
+    font-size: 16px;
+    color: var(--text-sub);
+}
+
+.cart-empty-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 57px;
+    margin-top: 40px;
+    border-radius: 29px;
+    background: var(--red-dark);
+    color: var(--white);
+    font-size: 17px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.cart-empty-btn:hover {
+    background: #8E0000;
+}

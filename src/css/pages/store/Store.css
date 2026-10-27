@@ -262,3 +262,11 @@
     font-size: 18px;
     font-weight: 700;
 }
+
+/* 상품을 불러오지 못했을 때 (스토어/상세/장바구니 공통) */
+.product-error {
+    padding: 160px 20px;
+    text-align: center;
+    font-size: 17px;
+    color: var(--text-sub);
+}

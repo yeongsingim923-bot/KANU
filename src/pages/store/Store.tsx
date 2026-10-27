@@ -1,11 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import SubVisual from "../../components/common/SubVisual"
 import Reveal from "../../components/common/Reveal"
-import { products } from "../../data/products"
+import { useProductStore } from "../../store/productStore"
 import "../../css/pages/store/Store.css"
 import CartModal from "../../components/common/CartModal"
 import type { Product } from "../../data/products"
+import { useCartStore } from "../../store/cartStore"
 
 // ===== 탭 =====
 type TabKey = "all" | "stick" | "machine" | "capsule"
@@ -40,6 +41,14 @@ function Store() {
 
     // 팝업에 보여줄 제품 (null이면 팝업 숨김)
     const [cartItem, setCartItem] = useState<Product | null>(null)
+    const addToCart = useCartStore((s) => s.add)   // 장바구니 담기
+
+    // 상품 목록: 서버(DB)에서 불러오기
+    const products = useProductStore((s) => s.products)
+    const loading = useProductStore((s) => s.loading)
+    const error = useProductStore((s) => s.error)
+    const fetchProducts = useProductStore((s) => s.fetchProducts)
+    useEffect(() => { fetchProducts() }, [fetchProducts])
 
     const items = active === "all"
         ? products.filter((p) => p.best)
@@ -101,7 +110,7 @@ function Store() {
                     <button type="button" className="store-sort">추천순</button>
                 </div>
 
-                <p className="store-count">총 {count}개</p>
+                    <p className="store-count">{loading ? "상품을 불러오는 중..." : error || `총 ${count}개`}</p>
 
                 {/* ===== 제품 목록 ===== */}
                 <ul className="store-list">
@@ -132,7 +141,7 @@ function Store() {
                                 <button 
                                     type="button" 
                                     className="store-card-cart"
-                                    onClick={() => setCartItem(item)}
+                                    onClick={() => { addToCart(item.id, 1); setCartItem(item) }}
                                 >
                                     장바구니 담기
                                 </button>
@@ -152,7 +161,7 @@ function Store() {
             </div>
 
             {/* 장바구니 팝업: cartItem이 있을 때만 보임 */}
-            {cartItem && <CartModal item={cartItem} onClose={() => setCartItem(null)} />}
+                        {cartItem && <CartModal item={cartItem} qty={1} onClose={() => setCartItem(null)} />}
         </>
     )
 }

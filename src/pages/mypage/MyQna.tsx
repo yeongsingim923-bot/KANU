@@ -1,8 +1,10 @@
 import Lnb from "../../components/common/Lnb"
 import SubVisual from "../../components/common/SubVisual"
 import "../../css/pages/mypage/MyQna.css"
+import { useNavigate } from "react-router-dom"
 
 function MyQna() {
+    const navigate = useNavigate()
 
     return(
         <>
@@ -23,7 +25,7 @@ function MyQna() {
                         <h2>1:1 문의 내역</h2>
                         <span>제목을 누르면 문의 내용과 답변을 볼 수 있어요.</span>
                     </label>
-                    <button><img src="/images/notice.png"/>새 문의 하기</button>
+                    <button type="button" onClick={() => navigate('/qna')}><img src="/images/notice.png"/>새 문의 하기</button>
                 </div>
                 <table>
                     <thead>

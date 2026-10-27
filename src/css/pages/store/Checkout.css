@@ -128,3 +128,56 @@
 .checkout-list {
     border-top: 2px solid var(--black);
 }
+
+/* ===== 배송지 입력칸 (기존 박스 안에 한 줄씩) ===== */
+.checkout-form {
+    height: auto;
+    padding: 22px 40px;
+}
+
+.checkout-form label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 0;
+}
+
+.checkout-form label + label {
+    border-top: 1px solid #E2E2E2;
+}
+
+.checkout-form span {
+    flex-shrink: 0;
+    width: 70px;
+    font-weight: 700;
+}
+
+.checkout-form input {
+    flex: 1;
+    height: 36px;
+    border: 0;
+    outline: none;
+    font-size: 16px;
+}
+
+.checkout-form input::placeholder {
+    color: #9E8E8E;
+}
+
+/* 입력/주문 오류 문구 */
+.checkout-error {
+    margin-top: 12px;
+    padding-left: 4px;
+    font-size: 14px;
+    color: #FD2600;
+}
+
+/* 주문 하기: 링크 → 버튼으로 바뀌어서 폭 맞추기 */
+.cart-summary button.cart-order {
+    width: 100%;
+}
+
+.cart-summary button.cart-order:disabled {
+    opacity: 0.5;
+    cursor: default;
+}

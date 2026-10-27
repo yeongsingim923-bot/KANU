@@ -1,10 +1,37 @@
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, Navigate, useParams } from "react-router-dom"
 import SubVisual from "../../components/common/SubVisual"
+import { useAuthStore } from "../../store/authStore"
+import { ORDER_STEPS, won, formatDate } from "../../data/orders"
+import type { OrderDetail } from "../../data/orders"
 import "../../css/pages/mypage/MyOrder.css"        // 주문 단계 박스 같이 쓰기
 import "../../css/pages/mypage/MyOrderDetail.css"
 
-// 디자인용 화면 (데이터 연결은 나중에)
 function MyOrderDetail() {
+    const { id } = useParams()     // 주소 /mypage/order/20261027-0002 → 주문번호
+    const user = useAuthStore((s) => s.user)
+    const authLoading = useAuthStore((s) => s.loading)
+    const [order, setOrder] = useState<OrderDetail | null>(null)
+    const [error, setError] = useState("")
+
+    // 로그인 확인이 끝나면 주문 상세 불러오기
+    useEffect(() => {
+        if (!user || !id) return
+        const load = async () => {
+            const res = await fetch('/api/orders/' + encodeURIComponent(id))
+            const data = await res.json().catch(() => ({ message: `서버 오류 (${res.status})` }))
+            if (res.ok) setOrder(data)
+            else setError(data.message)
+        }
+        load()
+    }, [user, id])
+
+    if (authLoading) return null
+    if (!user) return <Navigate to="/login" replace state={{ from: `/mypage/order/${id}` }} />
+    if (error) return <p className="product-error">{error}</p>     // 없는 주문 / 남의 주문 / 서버 오류
+    if (!order) return null                                         // 불러오는 중
+
+    const totalQty = order.items.reduce((sum, it) => sum + it.qty, 0)
 
     return(
         <>
@@ -15,47 +42,39 @@ function MyOrderDetail() {
                 <div className="order-head">
                     <div>
                         <h3 className="order-title">주문상세</h3>
-                        <p className="order-date">2026.10.16 · 20261016-0024</p>
+                        <p className="order-date">{formatDate(order.createdAt)} · {order.orderNo}</p>
                     </div>
                     <Link to="/mypage" className="order-back">목록으로</Link>
                 </div>
-
                 {/* ===== 주문 단계 (마이페이지 홈이랑 같은 박스) ===== */}
+                                {/* 지금 단계만 강조 (취소된 주문은 모두 꺼짐) */}
                 <ol className="my-steps order-steps">
-                    <li className="is-on"><strong>1</strong>결제 완료</li>
-                    <li><strong>0</strong>배송 준비</li>
-                    <li><strong>0</strong>배송 중</li>
-                    <li><strong>0</strong>배송 완료</li>
+                    {ORDER_STEPS.map((step) => {
+                        const isNow = order.status === step
+                        return <li key={step} className={isNow ? "is-on" : ""}><strong>{isNow ? 1 : 0}</strong>{step}</li>
+                    })}
                 </ol>
 
                 {/* ===== 주문 상품 ===== */}
                 <section className="order-products">
                     <div className="order-section-head">
-                        <h4 className="order-section-title">주문 상품 2개</h4>
+                        <h4 className="order-section-title">주문 상품 {totalQty}개</h4>
                         <button type="button" className="order-track">배송 조회</button>
                     </div>
 
                     <ul className="order-list">
-                        <li className="order-item">
-                            <div className="order-item-img">
-                                <img src="/images/store/stick-latte.png" alt="카누 라떼" />
-                            </div>
-                            <div className="order-item-info">
-                                <p className="order-item-name">카누 라떼 (50T)</p>
-                                <p className="order-item-count">1개</p>
-                            </div>
-                            <p className="order-item-price">24,200원</p>
-                        </li>
-                        <li className="order-item">
-                            <div className="order-item-img">
-                                <img src="/images/store/capsule-caring-star.png" alt="케어링 스타 디카페인" />
-                            </div>
-                            <div className="order-item-info">
-                                <p className="order-item-name">케어링 스타 디카페인 (10캡슐)</p>
-                                <p className="order-item-count">1개</p>
-                            </div>
-                            <p className="order-item-price">8,400원</p>
-                        </li>
+                        {order.items.map((it) => (
+                            <li className="order-item" key={it.productId}>
+                                <div className="order-item-img">
+                                    {it.img && <img src={it.img} alt={it.name} />}
+                                </div>
+                                <div className="order-item-info">
+                                    <p className="order-item-name">{it.name} {it.option}</p>
+                                    <p className="order-item-count">{it.qty}개</p>
+                                </div>
+                                <p className="order-item-price">{won(it.price * it.qty)}</p>
+                            </li>
+                        ))}
                     </ul>
                 </section>
 
@@ -64,10 +83,10 @@ function MyOrderDetail() {
                     <section className="order-box">
                         <h4 className="order-section-title">배송지</h4>
                         <div className="order-address">
-                            <p className="order-address-name">김카누</p>
-                            <p>010-1234-5678</p>
-                            <p>서울특별시 OO구 OO로 00 (101동 101호)</p>
-                            <p className="order-address-memo">문 앞에 놓아주세요</p>
+                            <p className="order-address-name">{order.receiver}</p>
+                            <p>{order.phone}</p>
+                            <p>{order.address}</p>
+                            {order.memo && <p className="order-address-memo">{order.memo}</p>}
                         </div>
                     </section>
 
@@ -76,23 +95,23 @@ function MyOrderDetail() {
                         <dl className="order-pay">
                             <div>
                                 <dt>상품 합계</dt>
-                                <dd>36,100원</dd>
+                                <dd>{won(order.totalPrice)}</dd>
                             </div>
                             <div>
                                 <dt>할인 금액</dt>
-                                <dd>-3,500원</dd>
+                                <dd>-{won(order.discount)}</dd>
                             </div>
                             <div>
                                 <dt>배송비</dt>
-                                <dd>0원</dd>
+                                <dd>{won(order.shippingFee)}</dd>
                             </div>
                             <div>
-                                <dt>결제 수단</dt>
-                                <dd>신용카드 (일시불)</dd>
+                                <dt>주문 상태</dt>
+                                <dd>{order.status}</dd>
                             </div>
                             <div>
                                 <dt>총 결제 금액</dt>
-                                <dd className="order-pay-total">32,600원</dd>
+                                <dd className="order-pay-total">{won(order.payPrice)}</dd>
                             </div>
                         </dl>
                     </section>
