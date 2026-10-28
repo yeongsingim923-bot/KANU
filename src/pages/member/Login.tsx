@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import SubVisual from "../../components/common/SubVisual"
 import { useAuthStore } from "../../store/authStore"
 import "../../css/pages/member/Login.css"
@@ -31,11 +31,9 @@ function Login() {
                         <input name="password" type="password" placeholder="비밀번호를 입력하세요" required autoComplete="current-password"/>
                     </label>
                     <div className="login-under-bar">
-                        <label className="check">
-                            <input type="checkbox" id="remember"/>
-                            <span>자동저장</span>
-                        </label>
-                        <span>아이디 찾기 | 비밀번호 찾기</span>
+                        <span>
+                            <Link to="/find">아이디 찾기</Link> | <Link to="/find?tab=pw">비밀번호 찾기</Link>
+                        </span>
                     </div>
                     <button className="login-button">로그인하기</button>
                     <div className="login-new">

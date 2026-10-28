@@ -5,6 +5,7 @@ import { useProductStore } from "../../store/productStore"
 import { useCartStore } from "../../store/cartStore"
 import { useAuthStore } from "../../store/authStore"
 import "../../css/pages/store/Cart.css"
+import ServerError from "../ServerError"
 
 const won = (n: number) => n.toLocaleString() + "원"
 const FREE_SHIPPING = 30000   // 이 금액 이상이면 배송비 무료
@@ -26,7 +27,7 @@ function Cart() {
     useEffect(() => { fetchProducts() }, [fetchProducts])
 
     if (loading) return null                                       // 불러오는 중 (빈 장바구니로 잠깐 보이는 것 방지)
-    if (error) return <p className="product-error">{error}</p>     // 서버 오류
+    if (error) return <ServerError />     // 서버 오류 → 404 디자인의 오류 화면
 
     // 장바구니(id + 수량)에 상품 정보 붙이기 (products에 없는 id는 빼기)
     const rows = items.flatMap((it) => {

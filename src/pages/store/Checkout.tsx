@@ -7,6 +7,7 @@ import { useProductStore } from "../../store/productStore"
 import "../../css/pages/store/Cart.css"       
 import "../../css/pages/store/Checkout.css"
 import { motion, AnimatePresence } from "motion/react"
+import ServerError from "../ServerError"
 
 const requests = ["문 앞에 놓아주세요", "경비실에 맡겨주세요", "배송 전 연락 부탁드려요"]
 
@@ -84,7 +85,7 @@ function Checkout() {
     if (authLoading || loading) return null
     // 로그인 안 했으면 로그인 화면으로 (로그인 후 장바구니 또는 상품 상세로 돌아옴)
     if (!user) return <Navigate to="/login" replace state={{ from: state.fromCart ? '/cart' : `/store/${state.items[0].id}` }} />
-    if (error) return <p className="product-error">{error}</p>     // 서버 오류
+    if (error) return <ServerError />     // 서버 오류 → 404 디자인의 오류 화면
 
     // 주문할 상품에 상품 정보 붙이기
     const rows = state.items.flatMap((it) => {

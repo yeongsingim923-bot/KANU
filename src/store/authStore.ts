@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type User = { id: number; username: string }
+type User = { id: number; username: string; role?: string }   // role: 'admin'이면 관리자
 
 type AuthState = {
     user: User | null     // 로그인한 사람 (없으면 null)

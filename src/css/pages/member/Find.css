@@ -1,0 +1,63 @@
+/* ===== 아이디 · 비밀번호 찾기 (입력칸/버튼은 Login.css의 .login 모양을 같이 씀) ===== */
+.find {
+    margin-top: 80px;
+}
+
+/* 단계 안내 */
+.find-step {
+    font-size: 16px;
+    color: var(--text-sub);
+}
+
+.find-step b {
+    font-weight: 700;
+    color: var(--red-dark);
+}
+
+/* 아이디 찾기 결과 */
+.find-result {
+    width: 100%;
+    max-width: 734px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 48px 20px;
+    border: 1px solid #A1A1A1;
+    border-radius: 23px;
+    text-align: center;
+}
+
+.find-result > p {
+    font-size: 18px;
+}
+
+.find-result > strong {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.find-result > span {
+    font-size: 14px;
+    color: var(--text-sub);
+}
+
+.find-result > .find-hint {
+    font-size: 14px;
+    color: #888888;
+}
+
+/* '로그인하러 가기': 링크라서 버튼처럼 가운데 정렬 */
+.find-result > .login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.find-link {
+    font-size: 15px;
+    color: #005FAD;
+    text-decoration: underline;
+}

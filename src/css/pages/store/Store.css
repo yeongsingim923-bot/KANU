@@ -270,3 +270,53 @@
     font-size: 17px;
     color: var(--text-sub);
 }
+
+/* =========================================
+   정렬 선택 (추천순 / 낮은 가격순 / 높은 가격순 / 할인율순)
+   ========================================= */
+.store-sort-wrap {
+    position: relative;
+    padding-bottom: 8px;            /* 버튼~목록 사이 틈을 감싸서, 마우스가 지나가도 안 닫히게 */
+    margin-bottom: -8px;
+}
+
+.store-sort {
+    width: auto;                    /* 긴 글자(낮은 가격순)도 들어가게 */
+    min-width: 116px;
+}
+
+.store-sort-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    min-width: 160px;
+    padding: 8px 0;
+    border: 1px solid var(--black);
+    border-radius: 20px;
+    background: var(--white);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.store-sort-list button {
+    width: 100%;
+    padding: 10px 22px;
+    font-size: 15px;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.store-sort-list button:hover {
+    background: var(--gray-bg);
+}
+
+.store-sort-list button.is-active {
+    font-weight: 700;
+    color: var(--red-dark);
+}
+
+/* 첫/마지막 페이지에서 화살표 흐리게 */
+.store-pager-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+}

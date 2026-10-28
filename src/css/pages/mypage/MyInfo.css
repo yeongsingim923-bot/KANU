@@ -112,3 +112,36 @@
         text-decoration: underline;
     }
     
+        /*회원탈퇴 확인 칸 (회원탈퇴 버튼을 누르면 열림)*/
+    .mypage-info .withdraw{
+        align-self: flex-end;
+        width: 100%;
+            max-width: 520px;
+        padding: 24px;
+        border: 1px solid #C50000;
+            border-radius: 15px;
+    }
+        .mypage-info .withdraw >p{
+            font-size: 15px;
+            color: #C50000;
+        }
+        .mypage-info .withdraw >div{
+            display: flex;
+            gap: 10px;
+        }
+            .mypage-info .withdraw input{
+                flex: 1;
+                height: 48px;
+                padding: 0 16px;
+                border: 1px solid #818181;
+                    border-radius: 15px;
+            }
+            .mypage-info .withdraw button{
+                width: 110px;
+                height: 48px;
+                border-radius: 38px;
+                background-color: #C50000;
+                font-weight: 600;
+                    font-size: 16px;
+                color: #FFFFFF;
+            }

@@ -1,0 +1,246 @@
+/* ===== 관리자 ===== */
+.admin{
+    width: 100%;
+        max-width: 1293px;
+    margin: 0 auto;
+    padding: 54px 81px 200px;
+}
+    .admin section{
+        display: flex;
+            flex-direction: column;
+        gap: 20px;
+    }
+
+    /*제목 줄 (제목 + 오른쪽에 필터)*/
+    .admin-head{
+        display: flex;
+            justify-content: space-between;
+            align-items: center;
+        gap: 20px;
+        margin-top: 30px;
+    }
+    .admin-head:first-child{
+        margin-top: 0;
+    }
+        .admin-head >h2{
+            font-weight: 700;
+                font-size: 28px;
+        }
+            .admin-head >h2 >span{
+                margin-left: 6px;
+                font-size: 16px;
+                color: #C50000;
+            }
+    .admin-empty{
+        padding: 60px 0;
+        border: 1px solid #D7D7D7;
+            border-radius: 20px;
+        text-align: center;
+        color: var(--text-sub);
+    }
+    .admin-check{
+        display: flex;
+            align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+        .admin-check >input{
+            width: 18px;
+            height: 18px;
+            accent-color: #C50000;
+        }
+    .admin-select{
+        height: 36px;
+        padding: 0 12px;
+        border: 1px solid #A9A9A9;
+            border-radius: 10px;
+        background: #FFFFFF;
+        font-size: 14px;
+    }
+
+    /*버튼*/
+    .admin-btns{
+        display: flex;
+            justify-content: center;
+        gap: 6px;
+    }
+    .admin-btn{
+        height: 30px;
+        padding: 0 14px;
+        border: 1px solid #A9A9A9;
+            border-radius: 38px;
+        background: #FFFFFF;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+    .admin-btn.is-primary{
+        border-color: #C50000;
+        background: #C50000;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
+    .admin-btn.is-danger{
+        border-color: #C90000;
+        color: #C90000;
+    }
+
+    /*상태 표시 / 분류 표시*/
+    .admin-status{
+        display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        min-width: 64px;
+        height: 24px;
+        padding: 0 10px;
+        border-radius: 38px;
+        background: #E8E8E8;
+        font-size: 12px;
+        color: #626262;
+        white-space: nowrap;
+    }
+    .admin-status.is-done{
+        background: #C50000;
+        color: #FFFFFF;
+    }
+    .admin-chip{
+        flex-shrink: 0;
+        padding: 3px 10px;
+        border: 1px solid #A9A9A9;
+            border-radius: 38px;
+        font-size: 12px;
+    }
+
+    /*표 (게시판 표와 같은 선)*/
+    .admin-table{
+        width: 100%;
+        border-collapse: collapse;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        font-size: 13px;
+    }
+        .admin-table tr{
+            border-bottom: 1px solid #DDD;
+        }
+        .admin-table th,
+        .admin-table td{
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .admin-table th{
+            font-weight: 500;
+        }
+        .admin-table td{
+            color: #555;
+        }
+        .admin-table .admin-left{
+            text-align: left;
+        }
+        .admin-table a{
+            color: #000;
+            text-decoration: underline;
+        }
+        .admin-table small{
+            color: #888;
+        }
+        .admin-table tr.is-editing{           /*수정 중인 공지*/
+            background: #FFF4F4;
+        }
+
+    /*1:1 문의 카드*/
+    .admin-cards{
+        display: flex;
+            flex-direction: column;
+        gap: 16px;
+    }
+    .admin-card{
+        display: flex;
+            flex-direction: column;
+        gap: 12px;
+        padding: 24px 28px;
+        border: 1px solid #A9A9A9;
+            border-radius: 20px;
+    }
+        .admin-card-top{
+            display: flex;
+                align-items: center;
+            gap: 12px;
+        }
+            .admin-card-top >strong{
+                flex: 1;
+                font-weight: 700;
+                    font-size: 17px;
+            }
+        .admin-card-meta{
+            font-size: 13px;
+            color: #888;
+        }
+        .admin-card-content{
+            padding: 16px 18px;
+            border-radius: 12px;
+            background: #F7F7F7;
+            font-size: 15px;
+                line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .admin-card-images{
+            display: flex;
+            gap: 10px;
+        }
+            .admin-card-images img{
+                width: 120px;
+                height: 90px;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+        .admin-card textarea{
+            height: 110px;
+            padding: 14px 16px;
+            border: 1px solid #818181;
+                border-radius: 12px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .admin-card-btns{
+            display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            gap: 14px;
+            font-size: 12px;
+            color: #888;
+        }
+
+    /*공지 입력 폼*/
+    .admin-form{
+        display: flex;
+            flex-direction: column;
+        gap: 12px;
+        padding: 24px 28px;
+        border: 1px solid #A9A9A9;
+            border-radius: 20px;
+    }
+        .admin-form >input{
+            height: 48px;
+            padding: 0 16px;
+            border: 1px solid #818181;
+                border-radius: 12px;
+            font-size: 15px;
+        }
+        .admin-form >textarea{
+            height: 160px;
+            padding: 14px 16px;
+            border: 1px solid #818181;
+                border-radius: 12px;
+            font-size: 14px;
+                line-height: 1.6;
+            resize: vertical;
+        }
+        .admin-form-bottom{
+            display: flex;
+                align-items: center;
+            gap: 10px;
+        }
+            .admin-form-bottom >.admin-check{
+                margin-right: auto;            /*체크박스는 왼쪽, 버튼은 오른쪽*/
+            }

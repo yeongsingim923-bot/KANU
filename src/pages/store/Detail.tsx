@@ -7,6 +7,7 @@ import { useProductStore } from "../../store/productStore"
 import type { Category, Product } from "../../data/products"
 import { useCartStore } from "../../store/cartStore"
 import "../../css/pages/store/Detail.css"
+import ServerError from "../ServerError"
 
 // 분류별 글자 + 배너 (배너 사진은 스토어 배너를 같이 씀)
 const categoryInfo: Record<Category, { chip: string; eng: string; lines: [string, string]; banner: string }> = {
@@ -48,7 +49,7 @@ function Detail() {
     }, [id])
 
     if (loading) return null                                       // 불러오는 중
-    if (error) return <p className="product-error">{error}</p>     // 서버 오류
+    if (error) return <ServerError />     // 서버 오류 → 404 디자인의 오류 화면
     const item = products.find((p) => p.id === id)
     if (!item) return <NotFound />                   // 없는 제품 주소
     const info = categoryInfo[item.category]

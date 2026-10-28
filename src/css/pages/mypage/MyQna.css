@@ -46,3 +46,100 @@
             width: 24px;
             height: 24px;
         }
+/*1:1 문의 내역 표 (내가 쓴 글 표와 같은 모양, .mypage-qna 안에만 적용)*/
+.mypage-qna table{
+    width: 100%;
+    border-collapse: collapse;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+    font-size: 13px;
+}
+    .mypage-qna tr{
+        border-bottom: 1px solid #DDD;
+    }
+    .mypage-qna th,
+    .mypage-qna td{
+        height: 52px;
+        padding: 0 12px;
+        text-align: center;
+    }
+    .mypage-qna th{
+        font-weight: 500;
+    }
+    .mypage-qna td{
+        color: #555;
+    }
+    .mypage-qna .mypage-qna-title{          /*제목 열만 왼쪽 정렬*/
+        text-align: left;
+    }
+        .mypage-qna .mypage-qna-title >button{    /*제목: 누르면 펼쳐짐*/
+            font-size: 13px;
+            color: #000;
+            text-align: left;
+        }
+        .mypage-qna .mypage-qna-title >button:hover{
+            text-decoration: underline;
+        }
+    /*답변 상태*/
+    .mypage-qna-status{
+        display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        width: 72px;
+        height: 26px;
+        border-radius: 38px;
+        background-color: #E8E8E8;
+        font-size: 12px;
+        color: #626262;
+    }
+    .mypage-qna-status.is-done{
+        background-color: #C50000;
+        color: #FFFFFF;
+    }
+    /*삭제 버튼*/
+    .mypage-qna-delete{
+        width: 52px;
+        height: 28px;
+        border: 1px solid #A9A9A9;
+            border-radius: 38px;
+        background-color: #FFFFFF;
+        font-size: 12px;
+    }
+    /*펼친 내용: 문의 본문 + 사진 + 답변*/
+    .mypage-qna .mypage-qna-detail >td{
+        height: auto;
+        padding: 24px 28px 28px;
+        background-color: #F7F7F7;
+        text-align: left;
+    }
+        .mypage-qna-content{
+            font-size: 15px;
+                line-height: 1.6;
+            color: #000;
+            white-space: pre-wrap;          /*줄바꿈(엔터) 그대로*/
+        }
+        .mypage-qna-detail img{
+            width: 160px;
+            height: 120px;
+            margin: 14px 10px 0 0;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .mypage-qna-answer{
+            display: flex;
+                flex-direction: column;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 18px 20px;
+            border-radius: 15px;
+            background-color: #FFFFFF;
+            font-size: 14px;
+                line-height: 1.6;
+        }
+            .mypage-qna-answer >strong{
+                font-weight: 700;
+                color: #C50000;
+            }
+            .mypage-qna-answer >p{
+                white-space: pre-wrap;
+            }

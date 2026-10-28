@@ -7,11 +7,31 @@ import { ORDER_STEPS, won, formatDate } from "../../data/orders"
 import type { OrderSummary } from "../../data/orders"
 import "../../css/pages/mypage/MyOrder.css"
 
+// 주문내역 기간 (months 0 = 전체)
+const PERIODS = [
+    { months: 1, label: "1개월" },
+    { months: 3, label: "3개월" },
+    { months: 6, label: "6개월" },
+    { months: 0, label: "전체" },
+]
+const PER_PAGE = 5   // 주문내역 한 페이지에 5개
+
+// 주문 날짜가 기간 안인지 ("2026-10-28 14:00:00" → 날짜로 바꿔 비교)
+function inPeriod(createdAt: string, months: number) {
+    if (months === 0) return true
+    const since = new Date()
+    since.setMonth(since.getMonth() - months)   // 오늘부터 N개월 전
+    return new Date(createdAt.replace(" ", "T")) >= since
+}
+
 function MyOrders() {
     const user = useAuthStore((s) => s.user)
     const authLoading = useAuthStore((s) => s.loading)
     const [orders, setOrders] = useState<OrderSummary[] | null>(null)   // null = 불러오는 중
     const [error, setError] = useState("")
+    const [months, setMonths] = useState(1)             // 기간 (처음엔 1개월)
+    const [periodOpen, setPeriodOpen] = useState(false) // 기간 목록 열림
+    const [page, setPage] = useState(1)
 
     // 로그인 확인이 끝나면 내 주문 목록 불러오기
     useEffect(() => {
@@ -38,7 +58,19 @@ function MyOrders() {
     if (!user) return <Navigate to="/login" replace state={{ from: "/mypage" }} />   // 로그인하면 다시 마이페이지로
 
     const list = orders ?? []
-    const activeCount = list.filter((o) => o.status !== "배송 완료" && o.status !== "주문 취소").length   // 진행 중인 주문
+    const activeCount = list.filter((o) => o.status !== "배송 완료" && o.status !== "주문 취소").length   // 진행 중인 주문 (기간과 상관없이 전체)
+
+    // 기간 안의 주문 → 지금 페이지 것만
+    const periodList = list.filter((o) => inPeriod(o.createdAt, months))
+    const lastPage = Math.max(1, Math.ceil(periodList.length / PER_PAGE))
+    const shown = periodList.slice((page - 1) * PER_PAGE, page * PER_PAGE)
+
+    // 기간 고르기: 1페이지부터 + 목록 닫기
+    const choosePeriod = (m: number) => {
+        setMonths(m)
+        setPage(1)
+        setPeriodOpen(false)
+    }
 
     return(
         <>
@@ -73,14 +105,30 @@ function MyOrders() {
                 {/* 단계별 주문 수 (1건 이상이면 강조) */}
                 <ol className="my-steps">
                     {ORDER_STEPS.map((step) => {
-                        const n = list.filter((o) => o.status === step).length
+                        const n = periodList.filter((o) => o.status === step).length   // 고른 기간 기준
                         return <li key={step} className={n > 0 ? "is-on" : ""}><strong>{n}</strong>{step}</li>
                     })}
                 </ol>
 
                 <div className="my-head">
                     <h3 className="my-title">주문내역</h3>
-                    <button type="button" className="my-period">1개월</button>
+                    {/* 기간: 누르면 목록이 열리고, 마우스가 벗어나면 닫힘 (스토어 정렬과 같은 방식) */}
+                    <div className="my-period-wrap" onMouseLeave={() => setPeriodOpen(false)}>
+                        <button type="button" className="my-period" onClick={() => setPeriodOpen(!periodOpen)}>
+                            {PERIODS.find((p) => p.months === months)?.label}
+                        </button>
+                        {periodOpen && (
+                            <ul className="my-period-list">
+                                {PERIODS.map((p) => (
+                                    <li key={p.months}>
+                                        <button type="button" className={p.months === months ? "is-active" : ""} onClick={() => choosePeriod(p.months)}>
+                                            {p.label}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </div>
 
                 {/* 주문 목록 */}
@@ -90,8 +138,10 @@ function MyOrders() {
                     <p className="my-empty">주문 내역을 불러오는 중...</p>
                 ) : orders.length === 0 ? (
                     <p className="my-empty">아직 주문 내역이 없어요.</p>
+                ) : periodList.length === 0 ? (
+                    <p className="my-empty">이 기간에 주문 내역이 없어요. 기간을 늘려 보세요.</p>
                 ) : (
-                    orders.map((o) => (
+                    shown.map((o) => (
                         <div className="my-order" key={o.orderNo}>
                             <div className="my-order-top">
                                 <span>{formatDate(o.createdAt)}</span>
@@ -119,13 +169,23 @@ function MyOrders() {
                     ))
                 )}
 
-                <div className="my-pager">
-                    <button type="button" className="my-pager-arrow">&lt;</button>
-                    <button type="button" className="my-pager-num is-active">1</button>
-                    <button type="button" className="my-pager-num">2</button>
-                    <button type="button" className="my-pager-num">3</button>
-                    <button type="button" className="my-pager-arrow">&gt;</button>
-                </div>
+                {/* 페이지 번호 (한 페이지뿐이면 숨김) */}
+                {lastPage > 1 && (
+                    <div className="my-pager">
+                        <button type="button" className="my-pager-arrow" onClick={() => setPage(page - 1)} disabled={page === 1}>&lt;</button>
+                        {Array.from({ length: lastPage }, (_, i) => i + 1).map((n) => (
+                            <button
+                                type="button"
+                                key={n}
+                                className={n === page ? "my-pager-num is-active" : "my-pager-num"}
+                                onClick={() => setPage(n)}
+                            >
+                                {n}
+                            </button>
+                        ))}
+                        <button type="button" className="my-pager-arrow" onClick={() => setPage(page + 1)} disabled={page === lastPage}>&gt;</button>
+                    </div>
+                )}
             </div>
         </>
     )

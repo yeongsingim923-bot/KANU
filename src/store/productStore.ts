@@ -21,7 +21,8 @@ export const useProductStore = create<ProductState>((set, get) => ({
             if (!res.ok) throw new Error(`서버 오류 (${res.status})`)
             set({ products: await res.json(), loading: false, error: '' })
         } catch (e) {
-            set({ loading: false, error: e instanceof Error ? e.message : '상품을 불러오지 못했습니다' })
+            console.error('상품 불러오기 실패:', e)   // 개발자용: 자세한 원인(502 등)은 개발자도구 콘솔에
+            set({ loading: false, error: '상품 정보를 불러오지 못했어요. 잠시 후 다시 시도해주세요.' })
         }
     },
 }))

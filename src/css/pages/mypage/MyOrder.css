@@ -265,3 +265,46 @@
     font-size: 16px;
     color: var(--text-sub);
 }
+
+/* 기간 선택 목록 (스토어 정렬과 같은 모양) */
+.my-period-wrap {
+    position: relative;
+    padding-bottom: 8px;            /* 버튼~목록 사이 틈을 감싸서, 마우스가 지나가도 안 닫히게 */
+    margin-bottom: -8px;
+}
+
+.my-period-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    min-width: 120px;
+    padding: 8px 0;
+    border: 1px solid var(--black);
+    border-radius: 14px;
+    background: var(--white);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.my-period-list button {
+    width: 100%;
+    padding: 9px 18px;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.my-period-list button:hover {
+    background: var(--gray-bg);
+}
+
+.my-period-list button.is-active {
+    font-weight: 700;
+    color: var(--red-dark);
+}
+
+/* 첫/마지막 페이지에서 화살표 흐리게 */
+.my-pager-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+}

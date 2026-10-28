@@ -12,8 +12,8 @@ function Footer() {
                     </Link>
 
                     <ul className="footer-links">
-                        <li><a href="#" className="footer-link">이용약관</a></li>
-                        <li><a href="#" className="footer-link footer-link-bold">개인정보처리방침</a></li>
+                        <li><Link to="/terms" className="footer-link">이용약관</Link></li>
+                        <li><Link to="/privacy" className="footer-link footer-link-bold">개인정보처리방침</Link></li>
                         <li><Link to="/notice" className="footer-link">고객지원</Link></li>
                     </ul>
 

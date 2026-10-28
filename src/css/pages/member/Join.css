@@ -18,11 +18,11 @@
             flex-direction: column;
         gap: 0px;       /*밑 .join>div 땜에 gap 강제적용 방지*/
     }
-        .agreement >span{
+        .join .agreement >span{
             font-weight: 700;
             font-size: 32px;
         }
-        .agreement >ul{
+        .join .agreement >ul{
             display: flex;
                 flex-direction: column;
             padding: 32px;
@@ -30,7 +30,7 @@
             border: 1px solid #A1A1A1;
                 border-radius: 23px;
         }
-            .agreement >ul >li{
+            .join .agreement >ul >li{
                 display: flex;
                     align-items: center;
                 padding: 24px 25px;
@@ -39,19 +39,19 @@
                 font-weight: 500;
                     font-size: 20px;
             }
-            .agreement >ul >li:last-child{
+            .join .agreement >ul >li:last-child{
                 border-bottom: none;
             }
-                .agreement >ul >li >input{
+                .join .agreement >ul >li >input{
                     width: 30px;
                     height: 30px;
                 }
-                .agree-text {
+                .join .agree-text {
                     display: flex;
                     flex-direction: column;   /* 약관 문구 위, 안내 문장 아래 */
                     gap: 6px;                 /* 두 줄 사이 간격 */
                 }
-                    .agree-text > .hidden {
+                    .join .agree-text > .hidden {
                         font-size: 14px;
                     }
 

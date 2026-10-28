@@ -4,9 +4,10 @@ import "../../css/pages/search/SearchEmpty.css"
 
 type SearchEmptyProps = {
     keyword: string;   // 사용자가 검색한 단어 → "'OOO' 검색 결과가 없어요"에 표시
+    onTagClick?: (word: string) => void;   // 추천 태그를 눌렀을 때 (그 단어로 검색)
 };
 
-function SearchEmpty({ keyword }: SearchEmptyProps) {
+function SearchEmpty({ keyword, onTagClick }: SearchEmptyProps) {
     return (
         <div className="search-empty">
             {/* ===== 결과 없음 안내 ===== */}
@@ -20,10 +21,9 @@ function SearchEmpty({ keyword }: SearchEmptyProps) {
                 <p className="search-empty-desc">검색어의 철자를 확인하거나, 이런 검색어로 찾아보세요.</p>
 
                 <ul className="search-empty-tags">
-                    <li><button type="button">아메리카노</button></li>
-                    <li><button type="button">라떼</button></li>
-                    <li><button type="button">캡슐</button></li>
-                    <li><button type="button">디카페인</button></li>
+                    {["아메리카노", "라떼", "캡슐", "디카페인"].map((tag) => (
+                        <li key={tag}><button type="button" onClick={() => onTagClick?.(tag)}>{tag}</button></li>
+                    ))}
                 </ul>
             </div>
 

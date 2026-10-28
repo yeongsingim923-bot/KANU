@@ -64,6 +64,7 @@ function Header() {
                         {user ? (
                             <>
                                 <Link to="/mypage" className="header-util-link">{user.username}님 환영합니다.</Link>
+                                {user.role === 'admin' && <Link to="/admin" className="header-util-link">관리자</Link>}
                                 <button type="button" className="header-util-link" onClick={handleLogout}>로그아웃</button>
                             </>
                         ) : (

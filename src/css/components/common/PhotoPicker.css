@@ -1,0 +1,53 @@
+/* =========================================
+   사진첨부 (PhotoPicker) - 글쓰기, 1:1 문의 공통
+   ========================================= */
+
+/* 3장 다 골랐을 때 파일첨부 버튼 흐리게 */
+.photo-field .picture > button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* 안내 문구 (수정할 때 기존 사진 안내) */
+.photo-note {
+    font-size: 14px;
+    color: #A28E8E;
+}
+
+/* 고른 사진 미리보기 */
+.photo-preview {
+    display: flex;
+    gap: 12px;
+}
+
+.photo-preview li {
+    position: relative;
+    overflow: hidden;
+    width: 120px;
+    height: 120px;
+    border: 1px solid #D7D7D7;
+    border-radius: 15px;
+}
+
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 오른쪽 위 X (사진 빼기) */
+.photo-preview button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+}

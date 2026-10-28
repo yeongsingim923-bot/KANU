@@ -46,3 +46,48 @@
             width: 24px;
             height: 24px;
         }
+        
+/*내가 쓴 글 표 (게시판 목록 표와 같은 모양, .mypage-posts 안에만 적용)*/
+.mypage-posts table{
+    width: 100%;
+    border-collapse: collapse;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+    font-size: 13px;
+}
+    .mypage-posts tr{
+        border-bottom: 1px solid #DDD;
+    }
+    .mypage-posts th,
+    .mypage-posts td{
+        height: 52px;
+        padding: 0 12px;
+        text-align: center;
+    }
+    .mypage-posts th{
+        font-weight: 500;
+    }
+    .mypage-posts td{
+        color: #555;
+    }
+    .mypage-posts .mypage-posts-title{          /*제목 열만 왼쪽 정렬*/
+        text-align: left;
+    }
+    .mypage-posts td.mypage-posts-title{
+        color: #000;
+    }
+    /*관리: 수정 / 삭제 버튼*/
+    .mypage-posts-manage{
+        display: flex;
+            justify-content: center;
+        gap: 8px;
+    }
+        .mypage-posts-manage >button{
+            width: 82px;
+            height: 31px;
+            border: 1px solid #A9A9A9;
+                border-radius: 38px;
+            background-color: #FFFFFF;
+            font-weight: 600;
+                font-size: 16px;
+        }

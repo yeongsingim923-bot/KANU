@@ -69,15 +69,15 @@
             flex-direction: column;
         padding: 52px 0 26px 0;
     }
-        .view-main-1,
-        .view-main-2,
-        .view-main-3{
+        .board-view .view-main-1,
+        .board-view .view-main-2,
+        .board-view .view-main-3{
             width: 100%;
             height: 276px;
             display: flex;
             margin-bottom: 17px;
         }
-            .view-main >img{    /*첨부 사진: 칸(높이 276px)을 꽉 채우고 넘치는 부분은 잘라냄*/
+            .board-view [class^="view-main-"] >img{    /*첨부 사진: 칸(높이 276px)을 꽉 채우고 넘치는 부분은 잘라냄*/
                 width: 100%;
                 height: 100%;
                 object-fit: cover;  
@@ -133,28 +133,28 @@
                     background-color: #FFFFFF;
                     letter-spacing: 0.05em;
                 }
-                .loginUser-control{
+                .board-view .loginUser-control{
                     display: flex;
                         gap: 29px;
                 }
-            .coment >span{
+            .board-view .coment >span{
                 font-weight: 700;
                     font-size: 24px;
                 margin-bottom: 27px;
             }
-            .coment-add{
+            .board-view .coment-add{
                 width: 100%;
                 display: flex;
                 gap: 17px;
                 height: 87px;
                 margin-bottom: 43px;
             }
-                .coment-add >textarea{
+                .board-view .coment-add >textarea{
                     width: 100%;
                     border: 1px solid #818181;
                         border-radius: 15px;
                 }
-                .coment-add >button{
+                .board-view .coment-add >button{
                     width: 110px;
                     display: flex;
                         justify-content: center;
@@ -164,28 +164,6 @@
                     font-size: 20px;
                         letter-spacing: 0.05em;
                     color: #FFFFFF;
-                }
-            .coment >label{
-                border: none;
-                    border-bottom: 1px solid #717171;
-                display: flex;
-                    flex-direction: column;
-                padding: 17px 0 29px 0;
-                gap: 16px;
-                margin-bottom: 66px;
-            }
-                .coment >label >div{
-                    display: flex;
-                    gap: 29px;
-                }
-                    .coment >label >div >span:first-child{
-                        font-weight: 500;
-                    }
-                    .coment >label >div >span:last-child{
-                        color: #626262;
-                    }
-                .coment >label >p{
-                    border: none;
                 }
         .board-view .board-list{
             width: 100%;
@@ -212,5 +190,69 @@
                 .board-view .board-list >div >span:last-child{
                     padding-left: 12px;
                 }
-            
-           
+                .board-view .board-list >div >button:hover:not(:disabled){
+                    text-decoration: underline;
+                }
+                .board-view .board-list >div >button:disabled{     /*이전글/다음글이 없을 때*/
+                    color: #A9A9A9;
+                    cursor: default;
+                }
+/*좋아요 누른 상태*/
+.board-view .Like-btn.is-liked{
+    border-color: #C90000;
+    color: #C90000;
+}
+/*댓글: 로그인 안 했을 때 안내*/
+.board-view .coment-login{
+    margin-bottom: 43px;
+    padding: 24px;
+    border-radius: 15px;
+    background-color: #F7F7F7;
+    text-align: center;
+    color: #626262;
+}
+    .board-view .coment-login >a{
+        font-weight: 700;
+        color: #C90000;
+        text-decoration: underline;
+    }
+/*댓글 등록 버튼: 입력 전에는 흐리게*/
+.board-view .coment-add >button:disabled{
+    opacity: 0.4;
+    cursor: default;
+}
+/*댓글 목록 (기존 .coment >label 모양을 여러 개용으로)*/
+.board-view .coment-list{
+    margin-bottom: 66px;
+}
+    .board-view .coment-list >li{
+        display: flex;
+            flex-direction: column;
+        gap: 16px;
+        padding: 17px 0 29px 0;
+        border-bottom: 1px solid #717171;
+    }
+        .board-view .coment-list >li >div{
+            display: flex;
+                align-items: center;
+            gap: 29px;
+        }
+            .board-view .coment-list >li >div >span:first-child{     /*작성자*/
+                font-weight: 500;
+            }
+            .board-view .coment-list >li >div >span:nth-child(2){    /*작성일*/
+                color: #626262;
+            }
+            .board-view .coment-list >li >div >button{                /*본인 댓글 삭제*/
+                margin-left: auto;
+                font-size: 14px;
+                color: #888888;
+                text-decoration: underline;
+            }
+        .board-view .coment-list >li >p{
+            white-space: pre-wrap;          /*줄바꿈(엔터) 그대로*/
+        }
+    .board-view .coment-list >.coment-empty{
+        align-items: center;
+        color: #888888;
+    }

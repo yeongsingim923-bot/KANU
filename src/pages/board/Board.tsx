@@ -13,12 +13,31 @@ type Post = {
     created_at: string
 }
 
+// 이번 주 인기글 한 개 (GET /api/community/hot)
+type HotPost = {
+    id: number
+    category: string
+    title: string
+    author: string
+    views: number
+    likeCount: number
+}
 
 function Board() {
     const [posts, setPosts] = useState<Post[]>([])
     const [category, setCategory] = useState('전체') 
     const[keyword,setKeyword]=useState('')
     const user = useAuthStore((s) => s.user)   // 로그인했을 때만 글쓰기 버튼 표시
+    const [hot, setHot] = useState<HotPost[]>([])   // 이번 주 인기글 (최대 3개)
+
+    // 이번 주 인기글: 처음 한 번 불러오기
+    useEffect(() => {
+        const load = async () => {
+            const res = await fetch('/api/community/hot')
+            if (res.ok) setHot(await res.json())
+        }
+        load()
+    }, [])
 
     useEffect(() => {
             const load = async () => {
@@ -51,9 +70,18 @@ function Board() {
                     <h1>이번 주 인기글</h1>
                 </div>
                 <div className="pop-board">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
+                    {hot.length === 0 ? (
+                        <p className="pop-empty">이번 주에 올라온 글이 아직 없어요.</p>
+                    ) : (
+                        hot.map((h, i) => (
+                            <Link key={h.id} to={`/board/${h.id}`} className="pop-card">
+                                <span className="pop-rank">{i + 1}</span>
+                                <span className="pop-category">{h.category}</span>
+                                <strong className="pop-title">{h.title}</strong>
+                                <span className="pop-meta">{h.author} · ♥ {h.likeCount} · 조회 {h.views}</span>
+                            </Link>
+                        ))
+                    )}
                 </div>
                 <div className="board-top">
                     <div className="tabs">

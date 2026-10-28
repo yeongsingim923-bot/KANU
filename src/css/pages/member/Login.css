@@ -32,22 +32,11 @@
 
     .login-under-bar{
         display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;      /*아이디 찾기 | 비밀번호 찾기를 오른쪽에*/
     }
-        .login .check{             /*체크박스 + 글자 한 줄로*/
-            display: flex;
-                align-items: center;
-            gap: 8px;
-            font-size: 14px;
-                letter-spacing: 0.05em;
-            cursor: pointer;
+        .login-under-bar a:hover{
+            text-decoration: underline;
         }
-            .login .check >input{
-                width: 20px;
-                height: 20px;
-                accent-color: #333;     /*체크됐을 때 색*/
-                cursor: pointer;
-            }
         .login-under-bar >span{
             font-size: 14px;
                 letter-spacing: 0.05em;

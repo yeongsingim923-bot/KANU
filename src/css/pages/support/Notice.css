@@ -1,0 +1,96 @@
+/* ===== 공지사항 ===== */
+.notice-board{
+    width: 100%;
+        max-width: 913px;
+    margin: 0 auto;
+    padding: 94px 0 200px 0;
+    display: flex;
+        flex-direction: column;
+    gap: 40px;
+}
+    .notice-board-head{
+        display: flex;
+            flex-direction: column;
+        gap: 14px;
+    }
+        .notice-board-head >h2{
+            font-weight: 700;
+                font-size: 36px;
+        }
+        .notice-board-head >span{
+            font-size: 16px;
+            color: #626262;
+        }
+
+    /*목록 표 (게시판 표와 같은 모양)*/
+    .notice-board table{
+        width: 100%;
+        border-collapse: collapse;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        font-size: 14px;
+    }
+        .notice-board tr{
+            border-bottom: 1px solid #DDD;
+        }
+        .notice-board th,
+        .notice-board td{
+            height: 56px;
+            padding: 0 12px;
+            text-align: center;
+        }
+        .notice-board th{
+            font-weight: 500;
+        }
+        .notice-board td{
+            color: #555;
+        }
+        .notice-board th:first-child{           /*번호 칸 폭*/
+            width: 90px;
+        }
+        .notice-board th:last-child{            /*등록일자 칸 폭*/
+            width: 130px;
+        }
+        .notice-board .notice-board-title{      /*제목 열만 왼쪽 정렬*/
+            text-align: left;
+        }
+            .notice-board .notice-board-title >button{
+                font-size: 15px;
+                color: #000;
+                text-align: left;
+            }
+            .notice-board .notice-board-title >button:hover{
+                text-decoration: underline;
+            }
+
+        /*고정 공지*/
+        .notice-board tr.is-pinned{
+            background-color: #FAFAFA;
+        }
+            .notice-board tr.is-pinned .notice-board-title >button{
+                font-weight: 700;
+            }
+        .notice-board-pin{
+            display: inline-flex;
+                justify-content: center;
+                align-items: center;
+            width: 48px;
+            height: 26px;
+            border-radius: 38px;
+            background-color: #C50000;
+            font-size: 12px;
+                font-weight: 600;
+            color: #FFFFFF;
+        }
+
+        /*펼친 내용*/
+        .notice-board .notice-board-detail >td{
+            height: auto;
+            padding: 28px 32px;
+            background-color: #F7F7F7;
+            text-align: left;
+            font-size: 15px;
+                line-height: 1.7;
+            color: #000;
+            white-space: pre-wrap;              /*줄바꿈(엔터) 그대로*/
+        }

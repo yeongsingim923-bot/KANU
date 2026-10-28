@@ -7,12 +7,21 @@ import type { OrderDetail } from "../../data/orders"
 import "../../css/pages/mypage/MyOrder.css"        // 주문 단계 박스 같이 쓰기
 import "../../css/pages/mypage/MyOrderDetail.css"
 
+// 배송 조회 안내 (실제 택배사 연동 대신 주문 상태에 맞는 안내)
+const TRACK_MESSAGES: Record<string, string> = {
+    "결제 완료": "결제가 완료되었어요. 상품을 준비해서 출고되면 배송 정보를 알려드릴게요.",
+    "배송 준비": "상품을 포장하고 있어요. 곧 출고될 예정이에요.",
+    "배송 중": "상품이 고객님께 가는 중이에요. 보통 1~2일 안에 도착해요.",
+    "배송 완료": "배송이 완료되었어요. 상품에 문제가 있으면 1:1 문의를 남겨주세요.",
+}
+
 function MyOrderDetail() {
     const { id } = useParams()     // 주소 /mypage/order/20261027-0002 → 주문번호
     const user = useAuthStore((s) => s.user)
     const authLoading = useAuthStore((s) => s.loading)
     const [order, setOrder] = useState<OrderDetail | null>(null)
     const [error, setError] = useState("")
+    const [showTrack, setShowTrack] = useState(false)   // 배송 조회 안내 열림
 
     // 로그인 확인이 끝나면 주문 상세 불러오기
     useEffect(() => {
@@ -59,8 +68,19 @@ function MyOrderDetail() {
                 <section className="order-products">
                     <div className="order-section-head">
                         <h4 className="order-section-title">주문 상품 {totalQty}개</h4>
-                        <button type="button" className="order-track">배송 조회</button>
+                        {/* 취소된 주문은 배송 조회 버튼 숨김 */}
+                        {order.status !== "주문 취소" && (
+                            <button type="button" className="order-track" onClick={() => setShowTrack(!showTrack)}>
+                                {showTrack ? "닫기" : "배송 조회"}
+                            </button>
+                        )}
                     </div>
+                    {showTrack && (
+                        <p className="order-track-box">
+                            <strong>{order.status}</strong>
+                            {TRACK_MESSAGES[order.status]}
+                        </p>
+                    )}
 
                     <ul className="order-list">
                         {order.items.map((it) => (

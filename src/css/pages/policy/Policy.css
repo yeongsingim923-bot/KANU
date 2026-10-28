@@ -1,0 +1,40 @@
+/* ===== 이용약관 · 개인정보처리방침 ===== */
+.policy {
+    width: 100%;
+    max-width: 913px;
+    margin: 0 auto;
+    padding: 94px 0 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+/* 맨 위 안내 (학습용 예시 문서) */
+.policy-note {
+    padding: 16px 20px;
+    border-radius: 12px;
+    background: var(--gray-bg);
+    font-size: 14px;
+    color: var(--text-sub);
+}
+
+/* 조항 하나 */
+.policy-clause {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.policy-clause > h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.policy-clause > p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #333333;
+    white-space: pre-wrap;          /* \n 줄바꿈 그대로 */
+}

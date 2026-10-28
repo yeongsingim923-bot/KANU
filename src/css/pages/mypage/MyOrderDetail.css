@@ -224,3 +224,21 @@
 .order-list-btn:hover {
     background: var(--red-dark);
 }
+
+/* 배송 조회 안내 상자 */
+.order-track-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 16px 0 0 17px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    background: var(--gray-bg);
+    font-size: 15px;
+}
+
+.order-track-box strong {
+    flex-shrink: 0;
+    font-weight: 700;
+    color: var(--red-dark);
+}

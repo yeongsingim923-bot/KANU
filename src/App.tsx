@@ -18,6 +18,7 @@ import Search from "./pages/search/Search";
 
 import Login from "./pages/member/Login";
 import Join from "./pages/member/Join";
+import Find from "./pages/member/Find";
 
 import MyOrders from "./pages/mypage/MyOrders";
 import MyOrderDetail from "./pages/mypage/MyOrderDetail";
@@ -31,6 +32,9 @@ import BoardView from "./pages/board/BoardView";
 
 import Notice from "./pages/support/Notice";
 import Qna from "./pages/support/Qna";
+
+import Admin from "./pages/admin/Admin";
+import Policy from "./pages/policy/Policy";
 
 function App() {
   return (
@@ -55,6 +59,7 @@ function App() {
         {/* 회원 */}
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/find" element={<Find />} />
 
         {/* 마이페이지 */}
         <Route path="/mypage" element={<MyOrders />} />
@@ -66,11 +71,19 @@ function App() {
         {/* 게시판 */}
         <Route path="/board" element={<Board />} />
         <Route path="/board/write" element={<BoardWrite />} />
+        <Route path="/board/edit/:id" element={<BoardWrite />} />   {/* 같은 화면을 수정 모드로 */}
         <Route path="/board/:id" element={<BoardView />} />
 
         {/* 고객지원 */}
         <Route path="/notice" element={<Notice />} />
-        <Route path="/qna" element={<Qna />} />        
+        <Route path="/qna" element={<Qna />} />
+
+        {/* 관리자 */}
+        <Route path="/admin" element={<Admin />} />
+
+        {/* 약관 */}
+        <Route path="/terms" element={<Policy />} />
+        <Route path="/privacy" element={<Policy />} />
       </Route>
 
       {/* 없는 주소 → 404 */}
