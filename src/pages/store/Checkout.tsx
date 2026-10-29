@@ -8,10 +8,9 @@ import "../../css/pages/store/Cart.css"
 import "../../css/pages/store/Checkout.css"
 import { motion, AnimatePresence } from "motion/react"
 import ServerError from "../ServerError"
+import { won } from "../../utils/format"
 
 const requests = ["문 앞에 놓아주세요", "경비실에 맡겨주세요", "배송 전 연락 부탁드려요"]
-
-const won = (n: number) => n.toLocaleString() + "원"
 const FREE_SHIPPING = 30000   // 이 금액 이상이면 배송비 무료 (Cart.tsx, server.js와 같은 규칙)
 const SHIPPING_FEE = 3000     // 기본 배송비
 

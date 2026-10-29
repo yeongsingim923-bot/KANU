@@ -8,12 +8,13 @@ import type { Category, Product } from "../../data/products"
 import { useCartStore } from "../../store/cartStore"
 import "../../css/pages/store/Detail.css"
 import ServerError from "../ServerError"
+import { won } from "../../utils/format"
 
-// 분류별 글자 + 배너 (배너 사진은 스토어 배너를 같이 씀)
-const categoryInfo: Record<Category, { chip: string; eng: string; lines: [string, string]; banner: string }> = {
-    stick:   { chip: "스틱 커피", eng: "KANU STICK",   lines: ["Café In", "Your Pocket"], banner: "/images/store/banner-stick.jpg" },
-    machine: { chip: "머신",      eng: "KANU MACHINE", lines: ["One Touch", "Barista"],   banner: "/images/store/banner-machine.jpg" },
-    capsule: { chip: "캡슐 커피", eng: "KANU CAPSULE", lines: ["Every Origin", "In One"], banner: "/images/store/banner-capsule.jpg" },
+// 분류별 표시 글자 (이름 위 작은 칩)
+const categoryChip: Record<Category, string> = {
+    stick: "스틱 커피",
+    machine: "머신",
+    capsule: "캡슐 커피",
 }
 
 // 맛 & 특징 4줄 (key = 데이터 이름, label = 화면 글자)
@@ -23,8 +24,6 @@ const tasteLabels = [
     { key: "bitter", label: "쓴맛" },
     { key: "sweet", label: "단맛" },
 ] as const
-
-const won = (n: number) => n.toLocaleString() + "원"
 
 // 할인율 (원래 가격 있을 때만)
 const getRate = (p: Product) => p.originPrice ? Math.round((1 - p.price / p.originPrice) * 100) : 0
@@ -52,23 +51,26 @@ function Detail() {
     if (error) return <ServerError />     // 서버 오류 → 404 디자인의 오류 화면
     const item = products.find((p) => p.id === id)
     if (!item) return <NotFound />                   // 없는 제품 주소
-    const info = categoryInfo[item.category]
     const [name, sub] = item.name.split(" | ")       // "케어링 스타 디카페인 | 카누 바리스타 전용캡슐" → 두 줄로 나눔
     const subText = [sub, item.option].filter(Boolean).join(" ")
     const rate = getRate(item)
     const detail = item.detail
-    // 함께 보면 좋은 카누: 같은 분류에서 자기 자신 빼고 4개
-    const related = products.filter((p) => p.category === item.category && p.id !== item.id).slice(0, 4)
+    // 함께 보면 좋은 카누: 추천 상품 먼저, 4개가 안 되면 같은 분류 상품으로 채움 (자기 자신은 빼고)
+    const others = products.filter((p) => p.id !== item.id)
+    const related = [
+        ...others.filter((p) => p.best),
+        ...others.filter((p) => !p.best && p.category === item.category),
+    ].slice(0, 4)
 
     return(
         <>
-            <section className="detail-top">
+            <section className="detail-top" id="detail-info">
                 <div className="detail-img">
                     <img src={detail?.img ?? item.img} alt={name} />
                 </div>
                 
                 <div className="detail-info">
-                    <span className="detail-chip">{info.chip}</span>
+                    <span className="detail-chip">{categoryChip[item.category]}</span>
                     <h2 className="detail-name">{name}</h2>
                     {subText && <p className="detail-sub">{subText}</p>}
 
@@ -109,26 +111,10 @@ function Detail() {
 
             <div className="detail-tabs">
                 <Lnb
-                    items={detail
-                        ? [{ title: "상품 정보", to: "#detail-info" }, { title: "맛 & 특징", to: "#detail-taste" }]
-                        : [{ title: "상품 정보", to: "#detail-info" }]}
+                    items={[{ title: "상품 정보", to: "#detail-info" }]}
                     active="#detail-info"
                 />
             </div>
-
-            <section className="detail-banner" id="detail-info">
-                <div className="detail-banner-text">
-                    <p className="detail-banner-eng">{info.eng}</p>
-                    <h3 className="detail-banner-title">
-                        {info.lines[0]}<br />
-                        {info.lines[1]}<span className="detail-banner-dot">.</span>
-                    </h3>
-                    <p className="detail-banner-desc">{item.desc}</p>
-                </div>
-                <div className="detail-banner-img">
-                    <img src={info.banner} alt="" />
-                </div>
-            </section>
 
             {detail && (
                 <section className="detail-taste" id="detail-taste">
@@ -156,7 +142,7 @@ function Detail() {
                 </section>
             )}
 
-                        <section className="detail-related">
+            <section className="detail-related">
                 <h3 className="detail-title">함께 보면 좋은 카누</h3>
                 <ul className="store-list">
                     {related.map((p) => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, Navigate, useLocation } from "react-router-dom"
 import SubVisual from "../../components/common/SubVisual"
 import "../../css/pages/store/OrderComplete.css"
+import { won } from "../../utils/format"
 
 // GET /api/orders/:orderNo 응답 중 이 화면에서 쓰는 것만
 type OrderDetail = {
@@ -13,8 +14,6 @@ type OrderDetail = {
     payPrice: number
     items: { name: string; option?: string; qty: number }[]
 }
-
-const won = (n: number) => n.toLocaleString() + "원"
 
 function OrderComplete() {
     const location = useLocation()

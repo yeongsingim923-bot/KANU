@@ -6,8 +6,8 @@ import { useCartStore } from "../../store/cartStore"
 import { useAuthStore } from "../../store/authStore"
 import "../../css/pages/store/Cart.css"
 import ServerError from "../ServerError"
+import { won } from "../../utils/format"
 
-const won = (n: number) => n.toLocaleString() + "원"
 const FREE_SHIPPING = 30000   // 이 금액 이상이면 배송비 무료
 const SHIPPING_FEE = 3000     // 기본 배송비
 

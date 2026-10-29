@@ -91,3 +91,21 @@
             font-weight: 600;
                 font-size: 16px;
         }
+
+/*내가 쓴 댓글: 소제목*/
+.mypage-posts-sub{
+    font-weight: 700;
+        font-size: 24px;
+}
+    .mypage-posts-sub >span{
+        margin-left: 6px;
+        font-size: 16px;
+        color: #C50000;
+    }
+/*댓글 내용: 길면 한 줄로 자르고 …*/
+.mypage-posts .mypage-posts-comment{
+    max-width: 420px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

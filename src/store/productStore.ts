@@ -6,7 +6,7 @@ type ProductState = {
     products: Product[]
     loading: boolean     // 처음 불러오는 중인지
     error: string        // 불러오기 실패 메시지 (없으면 '')
-    fetchProducts: () => Promise<void>
+    fetchProducts: (force?: boolean) => Promise<void>   // force: true = 이미 있어도 다시 불러오기 (관리자가 상품을 고친 뒤)
 }
 
 export const useProductStore = create<ProductState>((set, get) => ({
@@ -14,8 +14,8 @@ export const useProductStore = create<ProductState>((set, get) => ({
     loading: true,
     error: '',
 
-    fetchProducts: async () => {
-        if (get().products.length > 0) return   // 이미 불러왔으면 다시 안 부름 (페이지 이동할 때마다 요청 X)
+    fetchProducts: async (force = false) => {
+        if (!force && get().products.length > 0) return   // 이미 불러왔으면 다시 안 부름 (페이지 이동할 때마다 요청 X)
         try {
             const res = await fetch('/api/products')
             if (!res.ok) throw new Error(`서버 오류 (${res.status})`)

@@ -8,6 +8,7 @@ import CartModal from "../../components/common/CartModal"
 import ServerError from "../ServerError"
 import type { Product } from "../../data/products"
 import { useCartStore } from "../../store/cartStore"
+import { won } from "../../utils/format"
 
 // ===== 탭 =====
 type TabKey = "all" | "stick" | "machine" | "capsule"
@@ -26,8 +27,6 @@ const banners = {
     capsule: { eng: "KANU CAPSULE", lines: ["Every Origin", "In One"], desc: "산지마다 다른 풍미를 캡슐 한 알에", btn: "캡슐커피 보기", img: "/images/store/banner-capsule.jpg" },
 }
 
-const won = (n: number) => n.toLocaleString() + "원"
-
 // ===== 정렬 =====
 const sorts = [
     { key: "recommend", label: "추천순" },
@@ -37,7 +36,7 @@ const sorts = [
 ] as const
 type SortKey = (typeof sorts)[number]["key"]   // "recommend" | "low" | "high" | "discount"
 
-const PER_PAGE = 8   // 한 페이지에 보여줄 제품 수
+const PER_PAGE = 4   // 한 페이지에 보여줄 제품 수 (카드 한 줄 = 4개)
 
 // 할인율 (원래 가격 있을 때만)
 const getRate = (p: Product) => p.originPrice ? Math.round((1 - p.price / p.originPrice) * 100) : 0
@@ -82,9 +81,10 @@ function Store() {
     useEffect(() => { fetchProducts() }, [fetchProducts])
     if (error) return <ServerError />   // 상품을 못 불러오면 서버 오류 화면
 
-    const items = active === "all"
-        ? products.filter((p) => p.best)
-        : products.filter((p) => p.category === active)
+    // 전체 탭: 모든 상품 (추천 상품을 앞에, 나머지는 진열 순서대로) / 다른 탭: 그 분류만
+    // 탭에 맞는 상품 (전체 탭은 모든 상품) → 어느 탭이든 추천 상품을 앞에, 나머지는 진열 순서대로
+    const inTab = active === "all" ? products : products.filter((p) => p.category === active)
+    const items = [...inTab.filter((p) => p.best), ...inTab.filter((p) => !p.best)]
     const count = active === "all" ? products.length : items.length
 
     // 정렬 → 지금 페이지 것만 자르기

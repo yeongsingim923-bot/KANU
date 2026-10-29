@@ -103,23 +103,30 @@
             gap: 8px;
         }
             .board .tools >form >input{
-                width: 160px;
+                width: 400px;
                 height: 32px;
                 padding: 0 14px;
                 border: 1px solid #A9A9A9;
                     border-radius: 38px;
                 font-size: 13px;
             }
-            .board .tools >form >button{
-                width: 78px;
-                height: 32px;
-                border: none;
-                    border-radius: 38px;
-                background-color: #000000;
-                color: #FFFFFF;
-                font-weight: 700;
-                cursor: pointer;
-            }
+    /*맨 아래 오른쪽: 검색 + 글쓰기 버튼*/
+    .board .board-bottom{
+        display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        gap: 16px;
+    }
+        .board .board-bottom >button{
+            width: 78px;
+            height: 32px;
+            border: none;
+                border-radius: 38px;
+            background-color: #000000;
+            color: #FFFFFF;
+            font-weight: 700;
+            cursor: pointer;
+        }
         .board .write-btn{
             display: flex;
                 justify-content: center;
@@ -162,4 +169,36 @@
     }
     .board td.col-title{
         color: #000;
+    }
+/*제목 옆 댓글 수 [2]*/
+.board .board-comment-count{
+    margin-left: 6px;
+    font-size: 12px;
+        font-weight: 700;
+    color: #C90000;
+}
+/*페이지 번호*/
+.board .board-pager{
+    display: flex;
+        justify-content: center;
+    gap: 8px;
+}
+    .board .board-pager >button{
+        min-width: 32px;
+        height: 32px;
+        padding: 0 8px;
+        border: 1px solid #A9A9A9;
+            border-radius: 38px;
+        background-color: #FFFFFF;
+        font-size: 13px;
+    }
+    .board .board-pager >button.is-active{
+        border-color: #000000;
+        background-color: #000000;
+        color: #FFFFFF;
+        font-weight: 700;
+    }
+    .board .board-pager >button:disabled{
+        opacity: 0.3;
+        cursor: default;
     }

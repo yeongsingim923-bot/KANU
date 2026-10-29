@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import type { OrderItem } from "../../data/orders"
-import { won } from "../../data/orders"
+import { won } from "../../utils/format"
 
 // GET /api/admin/orders 한 줄
 type AdminOrder = {

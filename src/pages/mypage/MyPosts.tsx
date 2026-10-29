@@ -14,21 +14,32 @@ type MyPost = {
     created_at: string
 }
 
+// GET /api/comments/mine 응답 한 줄
+type MyComment = {
+    id: number
+    content: string
+    created_at: string
+    post_id: number
+    post_title: string
+}
+
 function MyPosts() {
     const navigate = useNavigate()
     const user = useAuthStore((s) => s.user)
     const authLoading = useAuthStore((s) => s.loading)
     const [posts, setPosts] = useState<MyPost[] | null>(null)   // null = 불러오는 중
     const [error, setError] = useState("")
+    const [comments, setComments] = useState<MyComment[] | null>(null)   // 내가 쓴 댓글 (null = 불러오는 중)
 
     // 로그인 확인이 끝나면 내가 쓴 글 불러오기
     useEffect(() => {
         if (!user) return
         const load = async () => {
-            const res = await fetch('/api/community/mine')
+            const [res, cRes] = await Promise.all([fetch('/api/community/mine'), fetch('/api/comments/mine')])
             const data = await res.json().catch(() => ({ message: `서버 오류 (${res.status})` }))
             if (res.ok) setPosts(data)
             else setError(data.message)
+            if (cRes.ok) setComments(await cRes.json())
         }
         load()
     }, [user])
@@ -40,6 +51,15 @@ function MyPosts() {
         const data = await res.json().catch(() => ({ message: `서버 오류 (${res.status})` }))
         if (!res.ok) return alert(data.message)
         setPosts((prev) => prev && prev.filter((p) => p.id !== id))
+    }
+
+    // 댓글 삭제: 확인창 → 서버에서 삭제 → 표에서도 빼기
+    const handleDeleteComment = async (id: number) => {
+        if (!confirm("댓글을 삭제할까요?")) return
+        const res = await fetch('/api/comments/' + id, { method: 'DELETE' })
+        const data = await res.json().catch(() => ({ message: `서버 오류 (${res.status})` }))
+        if (!res.ok) return alert(data.message)
+        setComments((prev) => prev && prev.filter((c) => c.id !== id))
     }
 
     if (authLoading) return null
@@ -94,6 +114,39 @@ function MyPosts() {
                                         <div className="mypage-posts-manage">
                                             <button type="button" onClick={() => navigate(`/board/edit/${p.id}`)}>수정</button>
                                             <button type="button" onClick={() => handleDelete(p.id)}>삭제</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
+
+                {/* ===== 내가 쓴 댓글 ===== */}
+                <h3 className="mypage-posts-sub">내가 쓴 댓글 <span>{comments?.length ?? 0}</span></h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th className="mypage-posts-title">글 제목</th>
+                            <th className="mypage-posts-title">댓글</th>
+                            <th>등록일자</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {comments === null ? (
+                            <tr><td colSpan={4}>불러오는 중...</td></tr>
+                        ) : comments.length === 0 ? (
+                            <tr><td colSpan={4}>아직 작성한 댓글이 없어요.</td></tr>
+                        ) : (
+                            comments.map((c) => (
+                                <tr key={c.id}>
+                                    <td className="mypage-posts-title"><Link to={`/board/${c.post_id}`}>{c.post_title}</Link></td>
+                                    <td className="mypage-posts-title mypage-posts-comment">{c.content}</td>
+                                    <td>{c.created_at.slice(0, 10).replaceAll('-', '.')}</td>
+                                    <td>
+                                        <div className="mypage-posts-manage">
+                                            <button type="button" onClick={() => handleDeleteComment(c.id)}>삭제</button>
                                         </div>
                                     </td>
                                 </tr>

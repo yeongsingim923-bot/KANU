@@ -11,6 +11,7 @@ export type Product = {
     best?: boolean      // 전체 탭 추천순에서 맨 앞에 보여줄 제품
     img: string
     detail?: ProductDetail   // 상세 정보 (없으면 상세 페이지에서 해당 칸 숨김)
+    sortOrder: number        // 진열 순서 (작을수록 앞, 관리자 화면에서 씀)
 }
 
 // 상세 페이지 전용 정보 (있는 제품만 적으면 됨)

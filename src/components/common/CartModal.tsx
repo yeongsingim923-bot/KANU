@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import type { Product } from "../../data/products"
 import "../../css/components/common/CartModal.css"
+import { won } from "../../utils/format"
 
 // 장바구니 담기 누르면 뜨는 팝업
 type CartModalProps = {
@@ -25,7 +26,7 @@ function CartModal({ item, qty, onClose }: CartModalProps) {
                     </div>
                     <div>
                         <p className="cart-modal-name">{item.name}</p>
-                        <p className="cart-modal-info">{qty}개 · {(item.price * qty).toLocaleString()}원</p>
+                        <p className="cart-modal-info">{qty}개 · {won(item.price * qty)}</p>
                     </div>
                 </div>
 

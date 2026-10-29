@@ -10,3 +10,6 @@ export const formatPhone = (v: string) => {
     if (d.length < 8) return `${d.slice(0, 3)}-${d.slice(3)}`
     return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`
 }
+
+// 25400 → "25,400원" (가격 표시)
+export const won = (n: number) => n.toLocaleString() + "원"

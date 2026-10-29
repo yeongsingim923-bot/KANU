@@ -5,6 +5,7 @@ import SearchEmpty from "./SearchEmpty"
 import type { Product } from "../../data/products"
 import "../../css/pages/store/Store.css"          // 제품 카드 모양 같이 쓰기
 import "../../css/pages/search/search.css"
+import { won } from "../../utils/format"
 
 // 입력 중 추천 (GET /api/search/suggest)
 type Suggest = {
@@ -21,7 +22,6 @@ const RECENT_KEY = "kanu-recent-searches"   // 최근 검색어를 브라우저�
 const PRODUCT_PER_PAGE = 4                  // 결과: 제품은 한 번에 4개
 const POST_PER_PAGE = 5                     // 결과: 게시글은 한 번에 5개
 
-const won = (n: number) => n.toLocaleString() + "원"
 const getRate = (p: Product) => p.originPrice ? Math.round((1 - p.price / p.originPrice) * 100) : 0
 
 // 최근 검색어 읽기/저장 (브라우저 localStorage, 못 읽어도 검색은 되게)

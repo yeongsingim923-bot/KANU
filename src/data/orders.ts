@@ -41,7 +41,5 @@ export type OrderDetail = {
 // 주문 단계 (마이페이지 단계 박스 순서)
 export const ORDER_STEPS = ["결제 완료", "배송 준비", "배송 중", "배송 완료"]
 
-export const won = (n: number) => n.toLocaleString() + "원"
-
 // "2026-10-27 18:50:12" → "2026.10.27"
 export const formatDate = (s: string) => s.slice(0, 10).replaceAll("-", ".")

@@ -24,7 +24,6 @@ export const menus = [
         to: "/board",
         subs: [
             { title: "자유게시판", to: "/board" },
-            { title: "글쓰기", to: "/board/write" },
         ],
     },
 

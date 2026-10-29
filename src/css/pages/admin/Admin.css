@@ -244,3 +244,61 @@
             .admin-form-bottom >.admin-check{
                 margin-right: auto;            /*체크박스는 왼쪽, 버튼은 오른쪽*/
             }
+    /*상품 입력 폼: 왼쪽 사진 미리보기 + 오른쪽 입력 칸 (두 칸씩)*/
+    .admin-product-form{
+        display: flex;
+        gap: 28px;
+    }
+        .admin-product-preview{
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            display: flex;
+                justify-content: center;
+                align-items: center;
+            border-radius: 12px;
+            background: #F7F7F7;
+            font-size: 13px;
+            color: #888;
+        }
+            .admin-product-preview >img{
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+        .admin-product-fields{
+            flex: 1;
+            display: grid;
+                grid-template-columns: 1fr 1fr;
+            gap: 12px 16px;
+        }
+            .admin-product-fields >label{
+                display: flex;
+                    flex-direction: column;
+                gap: 6px;
+                font-size: 13px;
+                color: #555;
+            }
+            .admin-product-fields >label.is-wide{       /*긴 칸은 한 줄 전체*/
+                grid-column: 1 / -1;
+            }
+            .admin-product-fields input,
+            .admin-product-fields select{
+                height: 42px;
+                padding: 0 14px;
+                border: 1px solid #818181;
+                    border-radius: 12px;
+                background: #FFFFFF;
+                font-size: 14px;
+                color: #000;
+            }
+            .admin-product-fields input:disabled{       /*수정 중엔 id 못 바꿈*/
+                background: #F0F0F0;
+                color: #888;
+            }
+    /*상품 표의 작은 사진*/
+    .admin-product-thumb{
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+    }
